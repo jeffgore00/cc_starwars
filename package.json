@@ -1,0 +1,41 @@
+{
+  "name": "senior-enrichment",
+  "version": "0.0.1",
+  "description": "A review time project",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
+    "start": "node main"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "skeleton"
+  ],
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.15.2",
+    "chalk": "^1.1.3",
+    "express": "^4.14.0",
+    "pg": "^6.1.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.1.0",
+    "sequelize": "^4.7.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "volleyball": "^1.4.1",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  }
+}
