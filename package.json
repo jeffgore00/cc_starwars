@@ -4,7 +4,7 @@
   "description": "A review time project",
   "main": "index.js",
   "scripts": {
-    "start:dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
+    "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
     "start": "node main"
   },
   "keywords": [
@@ -23,6 +23,7 @@
     "react-redux": "^4.4.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
     "sequelize": "^4.7.4"
@@ -36,6 +37,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "volleyball": "^1.4.1",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^3.1.1"
   }
 }
