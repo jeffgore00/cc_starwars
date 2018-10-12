@@ -1,21 +1,17 @@
 [
   {
-    "id": 1,
     "name": "Luke Skywalker",
     "url": "https://swapi.co/api/people/1/"
   },
   {
-    "id": 4,
     "name": "Darth Vader",
     "url": "https://swapi.co/api/people/4/"
   },
   {
-    "id": "unknown",
     "name": "Obi-wan Kenobi",
     "url": "https://swapi.co/api/people/unknown/"
   },
   {
-    "id": 3,
     "name": "R2-D2",
     "url": "https://swapi.co/api/people/3/"
   }

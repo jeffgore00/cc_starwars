@@ -1,59 +1,64 @@
 'use strict';
-const apiRouter = require('express').Router();
+const router = require('express').Router();
 const request = require('request-promise');
 const { promisify } = require('util');
 const path = require('path');
 const readFile = promisify(require('fs').readFile);
 
 const { SWAPI_ADDRESS } = require('../constants');
-const { groomFilmData } = require('../utils');
+const { groomFilmData, extractIDsFromAPIRoutes } = require('../../utils');
 
-apiRouter.get('/characters', async (req, res, next) => {
+/* ROUTES */
+
+router.get('/characters', async (req, res, next) => {
   try {
-    const data = await readFile(
+    const charactersJSON = await readFile(
       path.join(__dirname, '../../characters.json'),
       'utf-8'
     );
-    res.send(JSON.parse(data));
+    res.send(JSON.parse(charactersJSON));
   } catch (err) {
     next(err);
   }
 });
 
-apiRouter.get('/characters/:id/films', async (req, res, next) => {
+router.get('/characters/:id/films', async (req, res, next) => {
   try {
-    const characterData = await request(
-      `${SWAPI_ADDRESS}/people/${req.params.id}`
-    );
-    const { films } = JSON.parse(characterData);
-    const filmIds = films.map(film => {
-      const secondToLastSlash = film.lastIndexOf('/', film.length - 2);
-      return Number(film.slice(secondToLastSlash + 1, film.length - 1));
+    const characterData = await request({
+      uri: `${SWAPI_ADDRESS}/people/${req.params.id}`,
+      json: true
     });
-    // handle if character is in no films
-    const filmData = await fetchFilms(filmIds);
-    //console.log(filmData);
-    res.send(groomFilmData(filmData));
+    const { films } = characterData;
+    const filmIds = extractIDsFromAPIRoutes(films);
+    const groomedFilms = await fetchFilms(filmIds);
+    res.send(groomedFilms);
   } catch (err) {
-    // log the error in server
+    // write to server log?
     res.status(404).send(err);
   }
 });
 
+/* ROUTE HELPERS */
+
 async function fetchFilms(filmIds) {
-  const failures = [];
-  const films = [];
+  const filmsFailedToLoad = [];
+  const filmsLoaded = [];
   for (const filmId of filmIds) {
     try {
-      const film = await request(`${SWAPI_ADDRESS}/films/${filmId}`);
-      films.push({ ...JSON.parse(film), filmId });
+      const film = await request({
+        uri: `${SWAPI_ADDRESS}/films/${filmId}`,
+        json: true
+      });
+      filmsLoaded.push(groomFilmData(film, filmId));
     } catch (err) {
-      console.log(err);
-      failures.push(filmId);
+      filmsFailedToLoad.push(filmId);
     }
   }
-  console.log(films.length);
-  return films;
+  if (filmsFailedToLoad.length) {
+    console.log('DO SOMETHING HERE....');
+    // write to server log?
+  }
+  return filmsLoaded;
 }
 
-module.exports = apiRouter;
+module.exports = router;

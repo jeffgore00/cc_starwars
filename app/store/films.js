@@ -23,13 +23,16 @@ const filmsLoaded = films => ({
  * THUNK CREATORS
  */
 
-export const fetchCharacterFilms = charId => dispatch =>
-  axios
-    .get(`/api/characters/${charId}/films`)
-    .then(res => {
-      dispatch(filmsLoaded(res.data));
-    })
-    .catch(err => dispatch(errorReported(err)));
+export const fetchCharacterFilms = charId => async dispatch => {
+  try {
+    const response = await axios.get(`/api/characters/${charId}/films`);
+    const films = response.data;
+    dispatch(filmsLoaded(films));
+  } catch (err) {
+    dispatch(errorReported(err));
+  }
+};
+
 /**
  * REDUCER
  */

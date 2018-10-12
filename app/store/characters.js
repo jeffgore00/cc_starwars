@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { errorReported } from './error';
+import { extractIDFromAPIRoute } from '../../utils';
 
 /**
  * ACTION TYPES
@@ -8,53 +9,10 @@ import { errorReported } from './error';
 const CHARACTERS_LOADED = 'CHARACTERS_LOADED';
 const CHARACTERS_UPDATED = 'CHARACTERS_UPDATED';
 
-/*
-SELECTORS / UTIL FUNCS
-*/
-export const sortCharactersInOrder = characters =>
-  characters.sort((a, b) => a.order - b.order);
-
-const addSelectedPropToCharacters = characters =>
-  characters.map((character, idx) => ({
-    ...character,
-    selected: false,
-    order: idx + 1
-  }));
-
-export const updateCharacterSelection = (characters, charId) => {
-  const alreadySelectedCharacters = characters.filter(
-    character => character.selected && character.id !== charId
-  );
-  const alreadySelectedCharacter = alreadySelectedCharacters.length
-    ? alreadySelectedCharacters[0]
-    : null;
-  const newlySelectedCharacter = characters.filter(
-    character => character.id === charId
-  )[0];
-  const selectedCharacterIds = [
-    alreadySelectedCharacter ? alreadySelectedCharacter.id : null,
-    newlySelectedCharacter.id
-  ];
-  const otherCharacters = characters.filter(
-    character => !selectedCharacterIds.includes(character.id)
-  );
-  newlySelectedCharacter.selected = !newlySelectedCharacter.selected;
-  if (alreadySelectedCharacter) {
-    alreadySelectedCharacter.selected = false;
-    return [
-      ...otherCharacters,
-      alreadySelectedCharacter,
-      newlySelectedCharacter
-    ];
-  } else {
-    return [...otherCharacters, newlySelectedCharacter];
-  }
-};
-
 /**
  * ACTION CREATORS
  */
-const charactersLoaded = characters => ({
+export const charactersLoaded = characters => ({
   type: CHARACTERS_LOADED,
   characters
 });
@@ -71,7 +29,7 @@ export const fetchCharacters = () => dispatch =>
   axios
     .get(`/api/characters`)
     .then(res => {
-      const characters = addSelectedPropToCharacters(res.data);
+      const characters = addAdminPropsToCharacters(res.data);
       dispatch(charactersLoaded(characters));
     })
     .catch(err => dispatch(errorReported(err)));
@@ -88,3 +46,36 @@ export default function(state = [], action) {
       return state;
   }
 }
+
+/*
+SELECTORS / UTIL FUNCS
+*/
+const newlySelected = (character, selectionId) => character.id === selectionId;
+
+export function addAdminPropsToCharacters(characters) {
+  return characters.map((character, idx) => ({
+    ...character,
+    id: extractIDFromAPIRoute(character.url),
+    selected: false,
+    order: idx + 1
+  }));
+}
+
+export function getSelectedCharacter(characters, attribute, rule) {
+  const selectedCharacters = characters.filter(character =>
+    rule(character, attribute));
+  return selectedCharacters.length ? selectedCharacters[0] : null;
+}
+
+export const updateCharacterSelection = (characters, selectionId) => {
+  const newlySelectedCharacter = getSelectedCharacter(
+    characters,
+    selectionId,
+    newlySelected
+  );
+  const otherCharacters = characters.filter(
+    character => character.id !== newlySelectedCharacter.id
+  );
+  newlySelectedCharacter.selected = !newlySelectedCharacter.selected;
+  return [...otherCharacters, newlySelectedCharacter];
+};

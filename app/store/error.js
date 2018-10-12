@@ -6,7 +6,7 @@ export const errorReported = error => ({
   error
 });
 
-const errorAcknowledged = () => ({
+export const errorAcknowledged = () => ({
   type: ERROR_ACKNOWLEDGED,
   error: null
 });
