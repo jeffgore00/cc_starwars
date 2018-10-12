@@ -3,11 +3,11 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import characters from './characters';
-// import films from './films';
+import films from './films';
 
 const reducer = combineReducers({
-  characters
-  // films
+  characters,
+  films
 });
 
 const middleware = composeWithDevTools(
@@ -17,4 +17,4 @@ const store = createStore(reducer, middleware);
 
 export default store;
 export * from './characters';
-// export * from './films';
+export * from './films';

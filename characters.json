@@ -10,7 +10,7 @@
     "url": "https://swapi.co/api/people/4/"
   },
   {
-    "id": 10,
+    "id": "unknown",
     "name": "Obi-wan Kenobi",
     "url": "https://swapi.co/api/people/unknown/"
   },

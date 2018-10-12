@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   fetchCharacters,
   updateCharacterSelection,
-  charactersUpdated
+  charactersUpdated,
+  fetchCharacterFilms
 } from '../store';
 import CharacterList from './CharacterList';
 import FilmList from './FilmList';
@@ -11,27 +12,38 @@ import FilmList from './FilmList';
 class Root extends Component {
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.handleCharacterSelect = this.handleCharacterSelect.bind(this);
+    this.handleCharacterDeselect = this.handleCharacterDeselect.bind(this);
   }
 
   componentDidMount() {
     this.props.loadCharacters();
   }
 
-  handleClick(event, charId) {
+  handleCharacterSelect(event, charId) {
+    this.props.selectCharacter(this.props.characters, charId);
+    this.props.loadFilms(charId);
+  }
+
+  handleCharacterDeselect(event, charId) {
     this.props.selectCharacter(this.props.characters, charId);
   }
 
   render() {
-    const { characters, selectedCharacter } = this.props;
+    const { characters, selectedCharacter, films } = this.props;
     return (
       <div>
-        {selectedCharacter ? (
-          <FilmList character={selectedCharacter} />
+        {selectedCharacter && films.length ? (
+          <FilmList
+            character={selectedCharacter}
+            films={films}
+            handleCharacterDeselect={this.handleCharacterDeselect}
+          />
         ) : (
           <CharacterList
             characters={characters}
-            handleClick={this.handleClick}
+            handleCharacterSelect={this.handleCharacterSelect}
+            selectedCharacter={selectedCharacter}
           />
         )}
       </div>
@@ -39,14 +51,15 @@ class Root extends Component {
   }
 }
 
-const mapState = ({ characters }) => {
+const mapState = ({ characters, films }) => {
   const selectedCharacters = characters.filter(character => character.selected);
   let selectedCharacter = null;
   if (selectedCharacters.length) {
-    selectedCharacter = selectedCharacters[0].id;
+    selectedCharacter = selectedCharacters[0];
   }
   return {
     characters,
+    films,
     selectedCharacter
   };
 };
@@ -54,6 +67,7 @@ const mapState = ({ characters }) => {
 const mapDispatch = dispatch => {
   return {
     loadCharacters: () => dispatch(fetchCharacters()),
+    loadFilms: charId => dispatch(fetchCharacterFilms(charId)),
     selectCharacter: (characters, charId) => {
       const updatedCharacters = updateCharacterSelection(characters, charId);
       dispatch(charactersUpdated(updatedCharacters));

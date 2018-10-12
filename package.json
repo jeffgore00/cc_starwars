@@ -26,6 +26,8 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "sequelize": "^4.7.4"
   },
   "devDependencies": {
