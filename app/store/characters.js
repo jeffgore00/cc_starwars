@@ -5,7 +5,52 @@ import axios from 'axios';
  */
 
 const CHARACTERS_LOADED = 'CHARACTERS_LOADED';
-const CHARACTER_SELECTED = 'CHARACTER_SELECTED';
+const CHARACTERS_UPDATED = 'CHARACTERS_UPDATED';
+
+/*
+SELECTORS / UTIL FUNCS
+*/
+const sortCharactersInOrder = characters =>
+  characters.sort((a, b) => a.order - b.order);
+
+const addSelectedPropToCharacters = characters =>
+  sortCharactersInOrder(
+    characters.map((character, idx) => ({
+      ...character,
+      selected: false,
+      order: idx + 1
+    }))
+  );
+
+export const updateCharacterSelection = (characters, charId) => {
+  const alreadySelectedCharacters = characters.filter(
+    character => character.selected
+  );
+  const alreadySelectedCharacter = alreadySelectedCharacters.length
+    ? alreadySelectedCharacters[0]
+    : null;
+  const newlySelectedCharacter = characters.filter(
+    character => character.id === charId
+  )[0];
+  const selectedCharacterIds = [
+    alreadySelectedCharacter ? alreadySelectedCharacter.id : null,
+    newlySelectedCharacter.id
+  ];
+  const otherCharacters = characters.filter(
+    character => !selectedCharacterIds.includes(character.id)
+  );
+  newlySelectedCharacter.selected = !newlySelectedCharacter.selected;
+  if (alreadySelectedCharacter) {
+    alreadySelectedCharacter.selected = false;
+    return sortCharactersInOrder([
+      ...otherCharacters,
+      alreadySelectedCharacter,
+      newlySelectedCharacter
+    ]);
+  } else {
+    return sortCharactersInOrder([...otherCharacters, newlySelectedCharacter]);
+  }
+};
 
 /**
  * ACTION CREATORS
@@ -15,9 +60,9 @@ const charactersLoaded = characters => ({
   characters
 });
 
-const characterSelected = charName => ({
-  type: CHARACTER_SELECTED,
-  charName
+export const charactersUpdated = characters => ({
+  type: CHARACTERS_UPDATED,
+  characters
 });
 
 /**
@@ -26,7 +71,10 @@ const characterSelected = charName => ({
 export const fetchCharacters = () => dispatch =>
   axios
     .get(`/api/characters`)
-    .then(res => dispatch(charactersLoaded(res.data)))
+    .then(res => {
+      const characters = addSelectedPropToCharacters(res.data);
+      dispatch(charactersLoaded(characters));
+    })
     .catch(err => console.log(err));
 
 /**
@@ -35,6 +83,7 @@ export const fetchCharacters = () => dispatch =>
 export default function(state = [], action) {
   switch (action.type) {
     case CHARACTERS_LOADED:
+    case CHARACTERS_UPDATED:
       return action.characters;
     default:
       return state;

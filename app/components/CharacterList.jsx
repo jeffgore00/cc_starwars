@@ -1,11 +1,16 @@
 import React from 'react';
 
-const CharacterList = ({ characters }) => (
+const CharacterList = ({ characters, handleClick }) => (
   <div>
     {characters ? (
       <ul>
         {characters.map(character => (
-          <li key={character.id}>{character.name}</li>
+          <li
+            key={character.id}
+            onClick={event => handleClick(event, character.id)}
+          >
+            {character.name}
+          </li>
         ))}
       </ul>
     ) : null}
