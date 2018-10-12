@@ -8,10 +8,12 @@ const readFile = promisify(require('fs').readFile);
 
 /* DEPENDENCIES - INTERNAL */
 const { SWAPI_ADDRESS } = require('../constants');
+const { errorLog } = require('../utils');
 const {
   groomFilmData,
   extractIDsFromAPIRoutes,
-  buildErrorPayload
+  buildErrorPayload,
+  buildErrorLog
 } = require('../../utils');
 
 /* ROUTES */
@@ -38,7 +40,9 @@ router.get('/characters/:id/films', async (req, res, next) => {
       json: true
     });
   } catch (err) {
-    res.status(err.statusCode).send(buildErrorPayload(err, 'SWAPI', 'blocker'));
+    const customError = buildErrorPayload(err, 'SWAPI', 'blocker');
+    res.status(err.statusCode).send(customError);
+    errorLog.write(buildErrorLog(customError));
     return;
   }
   // If the above request is successful, use film routes contained in character

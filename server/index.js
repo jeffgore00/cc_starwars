@@ -2,15 +2,15 @@
 
 const express = require('express');
 const path = require('path');
-const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const { buildErrorPayload } = '../utils';
 
 const app = express();
 
 //logging middleware
-app.use(volleyball);
+app.use(morgan('dev'));
 
 //body parsing middleware
 app.use(bodyParser.json());

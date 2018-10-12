@@ -9,6 +9,19 @@ function buildErrorPayload(err, source, severity) {
   };
 }
 
+function buildErrorLog(error) {
+  return `${new Date()}
+----------------------------------------------
+  source: ${error.source}
+  request: ${error.request}
+  status code: ${error.statusCode}
+  severity: ${error.severity}
+  message: ${error.message}
+  full error: ${JSON.stringify(error.fullError)}
+
+`;
+}
+
 function buildErrorMessage(source, statusCode) {
   if (statusCode === 404) {
     if (source === 'SWAPI') {
@@ -66,5 +79,6 @@ module.exports = {
   extractIDFromAPIRoute,
   extractIDsFromAPIRoutes,
   buildErrorPayload,
-  buildErrorMessage
+  buildErrorMessage,
+  buildErrorLog
 };

@@ -8,4 +8,8 @@ public/bundle.js.map
 # NPM errors
 npm-debug.log
 
+# Server errors
+errors.log
+
+# Local machine files
 .DS_Store
