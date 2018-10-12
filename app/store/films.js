@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { errorReported } from './error';
+import axios from "axios";
+import { errorReported } from "./error";
 
 /**
  * ACTION TYPES
  */
 
-const FILMS_LOADED = 'FILMS_LOADED';
+const FILMS_LOADED = "FILMS_LOADED";
+const FILMS_CLEARED = "FILMS_CLEARED";
 
 /*
 SELECTORS / UTIL FUNCS
@@ -19,6 +20,10 @@ const filmsLoaded = films => ({
   films
 });
 
+export const filmsCleared = () => ({
+  type: FILMS_CLEARED
+});
+
 /**
  * THUNK CREATORS
  */
@@ -29,7 +34,7 @@ export const fetchCharacterFilms = charId => async dispatch => {
     const films = response.data;
     dispatch(filmsLoaded(films));
   } catch (err) {
-    dispatch(errorReported(err));
+    dispatch(errorReported(err.response.data));
   }
 };
 
@@ -40,6 +45,8 @@ export default function(state = [], action) {
   switch (action.type) {
     case FILMS_LOADED:
       return action.films;
+    case FILMS_CLEARED:
+      return [];
     default:
       return state;
   }

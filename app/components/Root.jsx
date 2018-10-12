@@ -4,7 +4,8 @@ import {
   fetchCharacters,
   updateCharacterSelection,
   charactersUpdated,
-  fetchCharacterFilms
+  fetchCharacterFilms,
+  filmsCleared
 } from '../store';
 import CharacterList from './CharacterList';
 import FilmList from './FilmList';
@@ -27,6 +28,7 @@ class Root extends Component {
 
   handleCharacterDeselect(event, charId) {
     this.props.selectCharacter(this.props.characters, charId);
+    this.props.clearFilms();
   }
 
   render() {
@@ -43,6 +45,7 @@ class Root extends Component {
           <CharacterList
             characters={characters}
             handleCharacterSelect={this.handleCharacterSelect}
+            handleCharacterDeselect={this.handleCharacterDeselect}
             selectedCharacter={selectedCharacter}
             error={error}
           />
@@ -69,11 +72,12 @@ const mapState = ({ characters, films, error }) => {
 const mapDispatch = dispatch => {
   return {
     loadCharacters: () => dispatch(fetchCharacters()),
-    loadFilms: charId => dispatch(fetchCharacterFilms(charId)),
     selectCharacter: (characters, charId) => {
       const updatedCharacters = updateCharacterSelection(characters, charId);
       dispatch(charactersUpdated(updatedCharacters));
-    }
+    },
+    loadFilms: charId => dispatch(fetchCharacterFilms(charId)),
+    clearFilms: () => dispatch(filmsCleared())
   };
 };
 

@@ -25,14 +25,16 @@ export const charactersUpdated = characters => ({
 /**
  * THUNK CREATORS
  */
-export const fetchCharacters = () => dispatch =>
-  axios
-    .get(`/api/characters`)
-    .then(res => {
-      const characters = addAdminPropsToCharacters(res.data);
-      dispatch(charactersLoaded(characters));
-    })
-    .catch(err => dispatch(errorReported(err)));
+
+export const fetchCharacters = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/characters');
+    const characters = addAdminPropsToCharacters(response.data);
+    dispatch(charactersLoaded(characters));
+  } catch (err) {
+    dispatch(errorReported(err.response.data));
+  }
+};
 
 /**
  * REDUCER

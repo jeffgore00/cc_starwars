@@ -1,3 +1,30 @@
+function buildErrorPayload(err, source, severity) {
+  return {
+    source,
+    request: err.options && err.options.uri ? err.options.uri : null,
+    statusCode: err.statusCode,
+    severity,
+    message: err.message,
+    fullError: err
+  };
+}
+
+function buildErrorMessage(source, statusCode) {
+  if (statusCode === 404) {
+    if (source === 'SWAPI') {
+      return 'The requested content could not be found on the SWAPI server.';
+    } else {
+      return 'That requested content could not be found.';
+    }
+  } else if (statusCode === 500) {
+    if (source === 'SWAPI') {
+      return 'There was a SWAPI internal server error. Please try your request again later.';
+    } else {
+      return 'There was an internal server error. It was been logged and we will investigate. Our apologies!';
+    }
+  }
+}
+
 function groomFilmData(rawFilm, id) {
   return {
     id,
@@ -37,5 +64,7 @@ function extractIDsFromAPIRoutes(routes) {
 module.exports = {
   groomFilmData,
   extractIDFromAPIRoute,
-  extractIDsFromAPIRoutes
+  extractIDsFromAPIRoutes,
+  buildErrorPayload,
+  buildErrorMessage
 };

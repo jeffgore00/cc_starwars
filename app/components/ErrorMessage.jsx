@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Header, Button } from 'semantic-ui-react';
+import { errorAcknowledged } from '../store';
+import { buildErrorMessage } from '../../utils';
 
-export default class ErrorMessage extends Component {
+class ErrorMessage extends Component {
   state = { modalOpen: true };
   handleOpen = () => this.setState({ modalOpen: true });
-  handleClose = () => this.setState({ modalOpen: false });
+  handleClose = () => {
+    this.props.acknowledgeError();
+    this.props.execRollbackActions();
+    this.setState({ modalOpen: false });
+  };
   render() {
+    const { source, statusCode } = this.props.error;
     return (
       <Modal
         open={this.state.modalOpen}
@@ -15,7 +23,7 @@ export default class ErrorMessage extends Component {
       >
         <Header icon="exclamation" content="Error" />
         <Modal.Content>
-          <h3>There was an error.</h3>
+          <h3>{buildErrorMessage(source, statusCode)}</h3>
         </Modal.Content>
         <Modal.Actions>
           <Button color="blue" onClick={this.handleClose} inverted>
@@ -26,3 +34,14 @@ export default class ErrorMessage extends Component {
     );
   }
 }
+
+const mapDispatch = dispatch => {
+  return {
+    acknowledgeError: () => dispatch(errorAcknowledged())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatch
+)(ErrorMessage);

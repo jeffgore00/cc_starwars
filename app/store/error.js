@@ -3,8 +3,10 @@ const ERROR_ACKNOWLEDGED = 'ERROR_ACKNOWLEDGED';
 
 /* When an error does occur...
 {
-  source: 'local' or 'SWAPI',
+  source: 'local' / 'SWAPI' / 'nointernet',
   status: [status code]
+  severity:
+  message:
 }
 
 */

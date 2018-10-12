@@ -4,6 +4,7 @@ import ErrorMessage from './ErrorMessage';
 const CharacterList = ({
   characters,
   handleCharacterSelect,
+  handleCharacterDeselect,
   selectedCharacter,
   error
 }) => (
@@ -21,7 +22,14 @@ const CharacterList = ({
         ))}
       </ul>
     ) : null}
-    {error ? <ErrorMessage /> : null}
+    {selectedCharacter && selectedCharacter.id && error ? (
+      <ErrorMessage
+        error={error}
+        execRollbackActions={() =>
+          handleCharacterDeselect(null, selectedCharacter.id)
+        }
+      />
+    ) : null}
   </div>
 );
 

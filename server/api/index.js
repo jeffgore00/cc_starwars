@@ -1,12 +1,18 @@
 'use strict';
+/* DEPENDENCIES - EXTERNAL */
 const router = require('express').Router();
 const request = require('request-promise');
 const { promisify } = require('util');
 const path = require('path');
 const readFile = promisify(require('fs').readFile);
 
+/* DEPENDENCIES - INTERNAL */
 const { SWAPI_ADDRESS } = require('../constants');
-const { groomFilmData, extractIDsFromAPIRoutes } = require('../../utils');
+const {
+  groomFilmData,
+  extractIDsFromAPIRoutes,
+  buildErrorPayload
+} = require('../../utils');
 
 /* ROUTES */
 
@@ -16,7 +22,8 @@ router.get('/characters', async (req, res, next) => {
       path.join(__dirname, '../../characters.json'),
       'utf-8'
     );
-    res.send(JSON.parse(charactersJSON));
+    const { characters } = JSON.parse(charactersJSON);
+    res.send(characters);
   } catch (err) {
     next(err);
   }
@@ -31,16 +38,18 @@ router.get('/characters/:id/films', async (req, res, next) => {
       json: true
     });
   } catch (err) {
-    res.status(404).send(err);
+    res.status(err.statusCode).send(buildErrorPayload(err, 'SWAPI', 'blocker'));
+    return;
   }
-  // With that successful, use API routes in character data to fetch film data
+  // If the above request is successful, use film routes contained in character
+  // data payload to fetch film data
   const { films } = characterData;
   const filmIds = extractIDsFromAPIRoutes(films);
   try {
     const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
     res.send(filmsLoaded);
   } catch (err) {
-    res.status(404).send(err);
+    res.status(err.statusCode).send(buildErrorPayload(err, 'SWAPI', 'blocker'));
   }
 });
 
