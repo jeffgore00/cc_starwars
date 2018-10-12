@@ -23,17 +23,23 @@ router.get('/characters', async (req, res, next) => {
 });
 
 router.get('/characters/:id/films', async (req, res, next) => {
+  let characterData;
+  // Fetch character data from SWAPI first
   try {
-    const characterData = await request({
+    characterData = await request({
       uri: `${SWAPI_ADDRESS}/people/${req.params.id}`,
       json: true
     });
-    const { films } = characterData;
-    const filmIds = extractIDsFromAPIRoutes(films);
-    const groomedFilms = await fetchFilms(filmIds);
-    res.send(groomedFilms);
   } catch (err) {
-    // write to server log?
+    res.status(404).send(err);
+  }
+  // With that successful, use API routes in character data to fetch film data
+  const { films } = characterData;
+  const filmIds = extractIDsFromAPIRoutes(films);
+  try {
+    const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
+    res.send(filmsLoaded);
+  } catch (err) {
     res.status(404).send(err);
   }
 });
@@ -51,14 +57,23 @@ async function fetchFilms(filmIds) {
       });
       filmsLoaded.push(groomFilmData(film, filmId));
     } catch (err) {
-      filmsFailedToLoad.push(filmId);
+      filmsFailedToLoad.push([filmId, err]);
     }
   }
-  if (filmsFailedToLoad.length) {
-    console.log('DO SOMETHING HERE....');
-    // write to server log?
+  // If absolutely zero films loaded, that's a problem, since SWAPI is based on
+  // the films. The user should know about this.
+  if (!filmsLoaded.length) {
+    throw new Error('No films loaded');
+  } else {
+    // Otherwise, one of the films may have failed, which we should know about,
+    // but we don't need to nuke the user experience entirely because a subset
+    // of films is missing. We will not notify the user but will write to our
+    // server error log.
+    return {
+      filmsLoaded,
+      filmsFailedToLoad
+    };
   }
-  return filmsLoaded;
 }
 
 module.exports = router;

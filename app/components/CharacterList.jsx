@@ -1,4 +1,5 @@
 import React from 'react';
+import ErrorMessage from './ErrorMessage';
 
 const CharacterList = ({
   characters,
@@ -7,7 +8,6 @@ const CharacterList = ({
   error
 }) => (
   <div>
-    {error ? alert('There was an error') : null}
     {selectedCharacter && !error ? <div>Loading...</div> : null}
     {characters ? (
       <ul>
@@ -21,6 +21,7 @@ const CharacterList = ({
         ))}
       </ul>
     ) : null}
+    {error ? <ErrorMessage /> : null}
   </div>
 );
 
