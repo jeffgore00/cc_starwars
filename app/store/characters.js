@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { errorReported } from './error';
 
 /**
  * ACTION TYPES
@@ -73,7 +74,7 @@ export const fetchCharacters = () => dispatch =>
       const characters = addSelectedPropToCharacters(res.data);
       dispatch(charactersLoaded(characters));
     })
-    .catch(err => console.log(err));
+    .catch(err => dispatch(errorReported(err)));
 
 /**
  * REDUCER

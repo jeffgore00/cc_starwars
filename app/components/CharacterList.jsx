@@ -3,10 +3,12 @@ import React from 'react';
 const CharacterList = ({
   characters,
   handleCharacterSelect,
-  selectedCharacter
+  selectedCharacter,
+  error
 }) => (
   <div>
-    {selectedCharacter ? <div>Loading...</div> : null}
+    {error ? alert('There was an error') : null}
+    {selectedCharacter && !error ? <div>Loading...</div> : null}
     {characters ? (
       <ul>
         {characters.sort((a, b) => a.order - b.order).map(character => (

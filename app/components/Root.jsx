@@ -30,7 +30,7 @@ class Root extends Component {
   }
 
   render() {
-    const { characters, selectedCharacter, films } = this.props;
+    const { characters, selectedCharacter, films, error } = this.props;
     return (
       <div>
         {selectedCharacter && films.length ? (
@@ -44,6 +44,7 @@ class Root extends Component {
             characters={characters}
             handleCharacterSelect={this.handleCharacterSelect}
             selectedCharacter={selectedCharacter}
+            error={error}
           />
         )}
       </div>
@@ -51,7 +52,7 @@ class Root extends Component {
   }
 }
 
-const mapState = ({ characters, films }) => {
+const mapState = ({ characters, films, error }) => {
   const selectedCharacters = characters.filter(character => character.selected);
   let selectedCharacter = null;
   if (selectedCharacters.length) {
@@ -60,6 +61,7 @@ const mapState = ({ characters, films }) => {
   return {
     characters,
     films,
+    error,
     selectedCharacter
   };
 };

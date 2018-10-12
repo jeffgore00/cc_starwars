@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { errorReported } from './error';
 
 /**
  * ACTION TYPES
@@ -28,7 +29,7 @@ export const fetchCharacterFilms = charId => dispatch =>
     .then(res => {
       dispatch(filmsLoaded(res.data));
     })
-    .catch(err => console.log('ERR! ', err));
+    .catch(err => dispatch(errorReported(err)));
 /**
  * REDUCER
  */
