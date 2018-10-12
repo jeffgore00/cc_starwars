@@ -10,21 +10,19 @@ const CHARACTERS_UPDATED = 'CHARACTERS_UPDATED';
 /*
 SELECTORS / UTIL FUNCS
 */
-const sortCharactersInOrder = characters =>
+export const sortCharactersInOrder = characters =>
   characters.sort((a, b) => a.order - b.order);
 
 const addSelectedPropToCharacters = characters =>
-  sortCharactersInOrder(
-    characters.map((character, idx) => ({
-      ...character,
-      selected: false,
-      order: idx + 1
-    }))
-  );
+  characters.map((character, idx) => ({
+    ...character,
+    selected: false,
+    order: idx + 1
+  }));
 
 export const updateCharacterSelection = (characters, charId) => {
   const alreadySelectedCharacters = characters.filter(
-    character => character.selected
+    character => character.selected && character.id !== charId
   );
   const alreadySelectedCharacter = alreadySelectedCharacters.length
     ? alreadySelectedCharacters[0]
@@ -42,13 +40,13 @@ export const updateCharacterSelection = (characters, charId) => {
   newlySelectedCharacter.selected = !newlySelectedCharacter.selected;
   if (alreadySelectedCharacter) {
     alreadySelectedCharacter.selected = false;
-    return sortCharactersInOrder([
+    return [
       ...otherCharacters,
       alreadySelectedCharacter,
       newlySelectedCharacter
-    ]);
+    ];
   } else {
-    return sortCharactersInOrder([...otherCharacters, newlySelectedCharacter]);
+    return [...otherCharacters, newlySelectedCharacter];
   }
 };
 

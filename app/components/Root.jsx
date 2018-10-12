@@ -6,6 +6,7 @@ import {
   charactersUpdated
 } from '../store';
 import CharacterList from './CharacterList';
+import FilmList from './FilmList';
 
 class Root extends Component {
   constructor() {
@@ -22,12 +23,17 @@ class Root extends Component {
   }
 
   render() {
+    const { characters, selectedCharacter } = this.props;
     return (
       <div>
-        <CharacterList
-          characters={this.props.characters}
-          handleClick={this.handleClick}
-        />
+        {selectedCharacter ? (
+          <FilmList character={selectedCharacter} />
+        ) : (
+          <CharacterList
+            characters={characters}
+            handleClick={this.handleClick}
+          />
+        )}
       </div>
     );
   }

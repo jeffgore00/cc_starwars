@@ -4,7 +4,7 @@ const CharacterList = ({ characters, handleClick }) => (
   <div>
     {characters ? (
       <ul>
-        {characters.map(character => (
+        {characters.sort((a, b) => a.order - b.order).map(character => (
           <li
             key={character.id}
             onClick={event => handleClick(event, character.id)}
