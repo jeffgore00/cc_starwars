@@ -9,6 +9,7 @@ import {
 } from '../store';
 import CharacterListContainer from './CharacterListContainer';
 import FilmListContainer from './FilmListContainer';
+import { getCharacter, selected } from '../store/characters';
 
 class Root extends Component {
   constructor() {
@@ -56,16 +57,11 @@ class Root extends Component {
 }
 
 const mapState = ({ characters, films, error }) => {
-  const selectedCharacters = characters.filter(character => character.selected);
-  let selectedCharacter = null;
-  if (selectedCharacters.length) {
-    selectedCharacter = selectedCharacters[0];
-  }
   return {
     characters,
     films,
     error,
-    selectedCharacter
+    selectedCharacter: getCharacter(characters, selected)
   };
 };
 

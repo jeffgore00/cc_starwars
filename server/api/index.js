@@ -32,33 +32,37 @@ router.get('/characters', async (req, res, next) => {
 });
 
 router.get('/characters/:id/films', async (req, res, next) => {
-  let characterData;
-  // Fetch character data from SWAPI first
   try {
-    characterData = await request({
-      uri: `${SWAPI_ADDRESS}/people/${req.params.id}`,
-      json: true
-    });
-  } catch (err) {
-    logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
-    return;
-  }
-  // If the above request is successful, use film routes contained in character
-  // data payload to fetch film data.
-  const { films } = characterData;
-  const filmIds = extractIDsFromAPIRoutes(films);
-  try {
-    const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
-    res.send(filmsLoaded);
-    if (filmsFailedToLoad.length) {
-      for (const film of filmsFailedToLoad) {
-        errorLog.write(
-          buildErrorLog(buildErrorPayload(film, 'SWAPI', 'minor'))
-        );
+    let characterData;
+    // Fetch character data from SWAPI first
+    try {
+      characterData = await request({
+        uri: `${SWAPI_ADDRESS}/people/${req.params.id}`,
+        json: true
+      });
+    } catch (err) {
+      logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
+      return;
+    }
+    // If the above request is successful, use film routes contained in character
+    // data payload to fetch film data.
+    const { films } = characterData;
+    const filmIds = extractIDsFromAPIRoutes(films);
+    try {
+      const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
+      res.send(filmsLoaded);
+      if (filmsFailedToLoad.length) {
+        for (const film of filmsFailedToLoad) {
+          errorLog.write(
+            buildErrorLog(buildErrorPayload(film, 'SWAPI', 'minor'))
+          );
+        }
       }
+    } catch (err) {
+      logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
     }
   } catch (err) {
-    logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
+    next(err);
   }
 });
 

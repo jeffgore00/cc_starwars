@@ -3,7 +3,7 @@ const errorLog = require('fs').createWriteStream('errors.log', { flags: 'a' });
 function logErrorAndRespond(err, res, log, source, severity) {
   const customError = buildErrorPayload(err, source, severity);
   log.write(buildErrorLog(customError));
-  res.status(err.statusCode).send(customError);
+  res.status(err.statusCode || 500).send(customError);
 }
 
 function buildErrorPayload(err, source, severity) {
