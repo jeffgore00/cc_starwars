@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   fetchCharacters,
-  updateCharacterSelection,
+  toggleCharacterSelection,
   charactersUpdated,
   fetchCharacterFilms,
   filmsCleared
@@ -73,7 +73,7 @@ const mapDispatch = dispatch => {
   return {
     loadCharacters: () => dispatch(fetchCharacters()),
     selectCharacter: (characters, charId) => {
-      const updatedCharacters = updateCharacterSelection(characters, charId);
+      const updatedCharacters = toggleCharacterSelection(characters, charId);
       dispatch(charactersUpdated(updatedCharacters));
     },
     loadFilms: charId => dispatch(fetchCharacterFilms(charId)),

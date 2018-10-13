@@ -52,7 +52,8 @@ export default function(state = [], action) {
 /*
 SELECTORS / UTIL FUNCS
 */
-const newlySelected = (character, selectionId) => character.id === selectionId;
+const selected = (character, selectionId) => character.id === selectionId;
+const notSelected = (character, selectionId) => character.id !== selectionId;
 
 export function addAdminPropsToCharacters(characters) {
   return characters.map((character, idx) => ({
@@ -63,21 +64,21 @@ export function addAdminPropsToCharacters(characters) {
   }));
 }
 
-export function getSelectedCharacter(characters, attribute, rule) {
+export function getCharacter(characters, attribute, rule) {
   const selectedCharacters = characters.filter(character =>
     rule(character, attribute));
   return selectedCharacters.length ? selectedCharacters[0] : null;
 }
 
-export const updateCharacterSelection = (characters, selectionId) => {
-  const newlySelectedCharacter = getSelectedCharacter(
-    characters,
-    selectionId,
-    newlySelected
-  );
-  const otherCharacters = characters.filter(
-    character => character.id !== newlySelectedCharacter.id
-  );
-  newlySelectedCharacter.selected = !newlySelectedCharacter.selected;
-  return [...otherCharacters, newlySelectedCharacter];
+export function getCharacters(characters, attribute, rule) {
+  const selectedCharacters = characters.filter(character =>
+    rule(character, attribute));
+  return selectedCharacters;
+}
+
+export const toggleCharacterSelection = (characters, selectionId) => {
+  const character = getCharacter(characters, selectionId, selected);
+  character.selected = !character.selected;
+  const otherCharacters = getCharacters(characters, selectionId, notSelected);
+  return [...otherCharacters, character];
 };

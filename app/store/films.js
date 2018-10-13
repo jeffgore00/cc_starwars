@@ -1,12 +1,12 @@
-import axios from "axios";
-import { errorReported } from "./error";
+import axios from 'axios';
+import { errorReported } from './error';
 
 /**
  * ACTION TYPES
  */
 
-const FILMS_LOADED = "FILMS_LOADED";
-const FILMS_CLEARED = "FILMS_CLEARED";
+const FILMS_LOADED = 'FILMS_LOADED';
+const FILMS_CLEARED = 'FILMS_CLEARED';
 
 /*
 SELECTORS / UTIL FUNCS
