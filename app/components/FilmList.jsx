@@ -2,14 +2,8 @@ import React from 'react';
 import FilmCard from './FilmCard';
 import { Item } from 'semantic-ui-react';
 
-const FilmList = ({ character, films, handleCharacterDeselect }) => (
+const FilmList = ({ films }) => (
   <div>
-    <button
-      onClick={event => handleCharacterDeselect(event, character.id)}
-      type="button"
-    >
-      Back
-    </button>
     <Item.Group divided>
       {films
         ? films

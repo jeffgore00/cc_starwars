@@ -7,8 +7,8 @@ import {
   fetchCharacterFilms,
   filmsCleared
 } from "../store";
-import CharacterList from "./CharacterList";
-import FilmList from "./FilmList";
+import CharacterListContainer from "./CharacterListContainer";
+import FilmListContainer from "./FilmListContainer";
 
 class Root extends Component {
   constructor() {
@@ -36,28 +36,19 @@ class Root extends Component {
     return (
       <div>
         {selectedCharacter && films.length ? (
-          <div id="movie-container">
-            <h1 id="movie-header">Films featuring {selectedCharacter.name}</h1>
-            <FilmList
-              character={selectedCharacter}
-              films={films}
-              handleCharacterDeselect={this.handleCharacterDeselect}
-            />
-          </div>
+          <FilmListContainer
+            character={selectedCharacter}
+            films={films}
+            handleCharacterDeselect={this.handleCharacterDeselect}
+          />
         ) : (
-          <div id="main-container">
-            <h1 id="main-header">STAR WARS</h1>
-            <h2 id="main-subheader">
-              Select a character to view a list of films in which they appear.
-            </h2>
-            <CharacterList
-              characters={characters}
-              handleCharacterSelect={this.handleCharacterSelect}
-              handleCharacterDeselect={this.handleCharacterDeselect}
-              selectedCharacter={selectedCharacter}
-              error={error}
-            />
-          </div>
+          <CharacterListContainer
+            characters={characters}
+            handleCharacterSelect={this.handleCharacterSelect}
+            handleCharacterDeselect={this.handleCharacterDeselect}
+            selectedCharacter={selectedCharacter}
+            error={error}
+          />
         )}
       </div>
     );

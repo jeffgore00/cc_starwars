@@ -12,11 +12,6 @@
   font-style: normal;
 }
 
-body {
-  background: black;
-  color: white;
-}
-
 .error-icon {
   width: 30%;
 }
@@ -93,6 +88,13 @@ a.ui.card:hover {
   background: transparent;
 }
 
+#entire-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  color: white;
+}
+
 #character-list {
   display: flex;
   flex-wrap: wrap;
@@ -102,7 +104,7 @@ a.ui.card:hover {
 
 #main-container {
   width: 100vw;
-  height: 80%;
+  min-height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,6 +122,36 @@ a.ui.card:hover {
   text-align: center;
   margin: 10px 1em 10px 1em;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+#film-container {
+  max-width: 900px;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 5vh auto;
+  padding: 10px;
+}
+
+#film-header {
+  width: 100vw;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  position: fixed;
+  top: 0;
+  margin: 0 auto;
+  padding: 5px;
+  padding-right: 10px;
+  font-family: "Star Jedi";
+  height: 5vh;
+  max-width: 900px;
+  z-index: 5;
+  font-size: 4vh;
+  display: flex;
+  justify-content: space-between;
+  background: white;
+}
+
+#film-header-go-back {
+  color: darkblue;
 }
 
 .character-card {
