@@ -5,7 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const { buildErrorPayload } = '../utils';
+const { logErrorAndRespond } = '../utils';
+const { errorLog } = './utils';
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.get('*', (req, res) => {
 //error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500).send(buildErrorPayload(err, 'local'));
+  logErrorAndRespond(err, res, errorLog, 'local', 'unknown');
 });
 
 module.exports = app;

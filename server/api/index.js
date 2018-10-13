@@ -12,12 +12,12 @@ const { errorLog } = require('../utils');
 const {
   groomFilmData,
   extractIDsFromAPIRoutes,
+  buildErrorLog,
   buildErrorPayload,
-  buildErrorLog
+  logErrorAndRespond
 } = require('../../utils');
 
 /* ROUTES */
-
 router.get('/characters', async (req, res, next) => {
   try {
     const charactersJSON = await readFile(
@@ -40,48 +40,53 @@ router.get('/characters/:id/films', async (req, res, next) => {
       json: true
     });
   } catch (err) {
-    const customError = buildErrorPayload(err, 'SWAPI', 'blocker');
-    res.status(err.statusCode).send(customError);
-    errorLog.write(buildErrorLog(customError));
+    logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
     return;
   }
   // If the above request is successful, use film routes contained in character
-  // data payload to fetch film data
+  // data payload to fetch film data.
   const { films } = characterData;
   const filmIds = extractIDsFromAPIRoutes(films);
   try {
     const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
     res.send(filmsLoaded);
+    if (filmsFailedToLoad.length) {
+      for (const film of filmsFailedToLoad) {
+        errorLog.write(
+          buildErrorLog(buildErrorPayload(film, 'SWAPI', 'minor'))
+        );
+      }
+    }
   } catch (err) {
-    res.status(err.statusCode).send(buildErrorPayload(err, 'SWAPI', 'blocker'));
+    logErrorAndRespond(err, res, errorLog, 'SWAPI', 'blocker');
   }
 });
 
 /* ROUTE HELPERS */
-
 async function fetchFilms(filmIds) {
   const filmsFailedToLoad = [];
   const filmsLoaded = [];
   for (const filmId of filmIds) {
+    let film;
     try {
-      const film = await request({
+      film = await request({
         uri: `${SWAPI_ADDRESS}/films/${filmId}`,
         json: true
       });
-      filmsLoaded.push(groomFilmData(film, filmId));
     } catch (err) {
-      filmsFailedToLoad.push([filmId, err]);
+      filmsFailedToLoad.push(err);
     }
+    filmsLoaded.push(groomFilmData(film, filmId));
   }
   // If absolutely zero films loaded, that's a problem, since SWAPI is based on
-  // the films. The user should know about this.
+  // the films. This should be a blocking error; the user should be able to see
+  // an empty films page.
   if (!filmsLoaded.length) {
-    throw new Error('No films loaded');
+    throw new Error('No films loaded!');
   } else {
-    // Otherwise, one of the films may have failed, which we should know about,
+    // Otherwise, one or more of the films may have failed, which we should know about,
     // but we don't need to nuke the user experience entirely because a subset
-    // of films is missing. We will not notify the user but will write to our
-    // server error log.
+    // of films is missing. We will still note the error in our server error log.
     return {
       filmsLoaded,
       filmsFailedToLoad

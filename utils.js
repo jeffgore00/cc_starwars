@@ -1,3 +1,9 @@
+function logErrorAndRespond(err, res, log, source, severity) {
+  const customError = buildErrorPayload(err, source, severity);
+  log.write(buildErrorLog(customError));
+  res.status(err.statusCode).send(customError);
+}
+
 function buildErrorPayload(err, source, severity) {
   return {
     source,
@@ -35,6 +41,8 @@ function buildErrorMessage(source, statusCode) {
     } else {
       return 'There was an internal server error. It was been logged and we will investigate. Our apologies!';
     }
+  } else {
+    return 'There was an error. Please try again later.';
   }
 }
 
@@ -80,5 +88,6 @@ module.exports = {
   extractIDsFromAPIRoutes,
   buildErrorPayload,
   buildErrorMessage,
-  buildErrorLog
+  buildErrorLog,
+  logErrorAndRespond
 };
