@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   fetchCharacters,
   toggleCharacterSelection,
   charactersUpdated,
   fetchCharacterFilms,
   filmsCleared
-} from "../store";
-import CharacterList from "./CharacterList";
-import FilmList from "./FilmList";
+} from '../store';
+import CharacterList from './CharacterList';
+import FilmList from './FilmList';
 
 class Root extends Component {
   constructor() {
@@ -34,23 +34,28 @@ class Root extends Component {
   render() {
     const { characters, selectedCharacter, films, error } = this.props;
     return (
-      <div id="main-container">
-        <h1 id="main-header">STAR WARS</h1>
-        <h2 id="main-subheader">Click me to see which movies I'm in!</h2>
+      <div>
         {selectedCharacter && films.length ? (
-          <FilmList
-            character={selectedCharacter}
-            films={films}
-            handleCharacterDeselect={this.handleCharacterDeselect}
-          />
+          <div id="movie-container">
+            <h1 id="movie-header">Films featuring {selectedCharacter.name}</h1>
+            <FilmList
+              character={selectedCharacter}
+              films={films}
+              handleCharacterDeselect={this.handleCharacterDeselect}
+            />
+          </div>
         ) : (
-          <CharacterList
-            characters={characters}
-            handleCharacterSelect={this.handleCharacterSelect}
-            handleCharacterDeselect={this.handleCharacterDeselect}
-            selectedCharacter={selectedCharacter}
-            error={error}
-          />
+          <div id="main-container">
+            <h1 id="main-header">STAR WARS</h1>
+            <h2 id="main-subheader">Click me to see which movies I'm in!</h2>
+            <CharacterList
+              characters={characters}
+              handleCharacterSelect={this.handleCharacterSelect}
+              handleCharacterDeselect={this.handleCharacterDeselect}
+              selectedCharacter={selectedCharacter}
+              error={error}
+            />
+          </div>
         )}
       </div>
     );

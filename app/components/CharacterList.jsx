@@ -1,6 +1,7 @@
 import React from 'react';
 import CharacterCard from './CharacterCard';
 import ErrorMessage from './ErrorMessage';
+import Loading from './Loading';
 
 const CharacterList = ({
   characters,
@@ -10,7 +11,7 @@ const CharacterList = ({
   error
 }) => (
   <div id="character-list">
-    {selectedCharacter && !error ? <div>Loading...</div> : null}
+    {selectedCharacter && !error ? <Loading /> : null}
     {characters
       ? characters
           .sort((a, b) => a.order - b.order)

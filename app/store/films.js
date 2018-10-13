@@ -32,7 +32,11 @@ export const fetchCharacterFilms = charId => async dispatch => {
   try {
     const response = await axios.get(`/api/characters/${charId}/films`);
     const films = response.data;
-    dispatch(filmsLoaded(films));
+    const filmsWithDates = films.map(film => ({
+      ...film,
+      date: new Date(film.date)
+    }));
+    dispatch(filmsLoaded(filmsWithDates));
   } catch (err) {
     dispatch(errorReported(err.response.data));
   }

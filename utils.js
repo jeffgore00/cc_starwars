@@ -2,7 +2,7 @@ function convertToFilename(name) {
   return name
     .trim()
     .toLowerCase()
-    .replace(' ', '-');
+    .replace(" ", "-");
 }
 
 function logErrorAndRespond(err, res, log, source, severity) {
@@ -37,19 +37,19 @@ function buildErrorLog(error) {
 
 function buildErrorMessage(source, statusCode) {
   if (statusCode === 404) {
-    if (source === 'SWAPI') {
-      return 'The requested content could not be found on the SWAPI server.';
+    if (source === "SWAPI") {
+      return "The requested content could not be found on the SWAPI server.";
     } else {
-      return 'That requested content could not be found.';
+      return "That requested content could not be found.";
     }
   } else if (statusCode === 500) {
-    if (source === 'SWAPI') {
-      return 'There was a SWAPI internal server error. Please try your request again later.';
+    if (source === "SWAPI") {
+      return "There was a SWAPI internal server error. Please try your request again later.";
     } else {
-      return 'There was an internal server error. It was been logged and we will investigate. Our apologies!';
+      return "There was an internal server error. It was been logged and we will investigate. Our apologies!";
     }
   } else {
-    return 'There was an error. Please try again later.';
+    return "There was an error. Please try again later.";
   }
 }
 
@@ -59,13 +59,14 @@ function groomFilmData(rawFilm, id) {
     title: rawFilm.title,
     date: rawFilm.release_date,
     desc: rawFilm.opening_crawl
-      ? rawFilm.opening_crawl.replace('\r\n', ' ')
-      : null
+      ? rawFilm.opening_crawl.replace("\r\n", " ")
+      : null,
+    episodeId: rawFilm.episode_id
   };
 }
 
 function extractIDFromAPIRoute(route) {
-  const secondToLastSlash = route.lastIndexOf('/', route.length - 2);
+  const secondToLastSlash = route.lastIndexOf("/", route.length - 2);
   const idStr = route.slice(secondToLastSlash + 1, route.length - 1);
   const id = Number(idStr);
   return isNaN(id) ? idStr : id;
@@ -89,7 +90,50 @@ function extractIDsFromAPIRoutes(routes) {
   return routes.map(route => extractIDFromAPIRoute(route));
 }
 
+// Code source: https://stackoverflow.com/questions/9083037/
+function romanize(num) {
+  if (isNaN(num)) return NaN;
+  var digits = String(+num).split(""),
+    key = [
+      "",
+      "C",
+      "CC",
+      "CCC",
+      "CD",
+      "D",
+      "DC",
+      "DCC",
+      "DCCC",
+      "CM",
+      "",
+      "X",
+      "XX",
+      "XXX",
+      "XL",
+      "L",
+      "LX",
+      "LXX",
+      "LXXX",
+      "XC",
+      "",
+      "I",
+      "II",
+      "III",
+      "IV",
+      "V",
+      "VI",
+      "VII",
+      "VIII",
+      "IX"
+    ],
+    roman = "",
+    i = 3;
+  while (i--) roman = (key[+digits.pop() + i * 10] || "") + roman;
+  return Array(+digits.join("") + 1).join("M") + roman;
+}
+
 module.exports = {
+  romanize,
   convertToFilename,
   groomFilmData,
   extractIDFromAPIRoute,
