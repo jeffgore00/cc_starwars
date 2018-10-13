@@ -20,14 +20,15 @@ class ErrorMessage extends Component {
         onClose={this.handleClose}
         basic
         size="small"
+        className="error-message"
       >
-        <Header icon="exclamation" content="Error" />
+        <img className="error-icon" src="images/icon_deathstar_white.png" />
         <Modal.Content>
           <h3>{buildErrorMessage(source, statusCode)}</h3>
         </Modal.Content>
         <Modal.Actions>
           <Button color="blue" onClick={this.handleClose} inverted>
-            OK
+            OK, go back
           </Button>
         </Modal.Actions>
       </Modal>

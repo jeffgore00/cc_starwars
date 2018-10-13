@@ -1,0 +1,11 @@
+.error-icon {
+  width: 30%;
+}
+
+.error-message {
+  text-align: center !important;
+}
+
+.ui.modal > .actions {
+  text-align: center;
+}
