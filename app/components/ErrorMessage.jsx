@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Header, Button } from 'semantic-ui-react';
+import { Modal, Button } from 'semantic-ui-react';
 import { errorAcknowledged } from '../store';
 import { buildErrorMessage } from '../../utils';
 
