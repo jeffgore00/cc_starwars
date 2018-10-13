@@ -1,4 +1,5 @@
 import React from 'react';
+import CharacterCard from './CharacterCard';
 import ErrorMessage from './ErrorMessage';
 
 const CharacterList = ({
@@ -8,20 +9,19 @@ const CharacterList = ({
   selectedCharacter,
   error
 }) => (
-  <div>
+  <div id="character-list">
     {selectedCharacter && !error ? <div>Loading...</div> : null}
-    {characters ? (
-      <ul>
-        {characters.sort((a, b) => a.order - b.order).map(character => (
-          <li
-            key={character.id}
-            onClick={event => handleCharacterSelect(event, character.id)}
-          >
-            {character.name}
-          </li>
-        ))}
-      </ul>
-    ) : null}
+    {characters
+      ? characters
+          .sort((a, b) => a.order - b.order)
+          .map(character => (
+            <CharacterCard
+              key={character.id}
+              name={character.name}
+              onClick={event => handleCharacterSelect(event, character.id)}
+            />
+          ))
+      : null}
     {selectedCharacter && selectedCharacter.id && error ? (
       <ErrorMessage
         error={error}

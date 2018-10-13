@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Star Jedi";
+  src: url("fonts/Starjedi.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .error-icon {
   width: 30%;
 }
@@ -8,4 +15,96 @@
 
 .ui.modal > .actions {
   text-align: center;
+}
+
+/* .ui.card,
+.ui.cards > .card {
+  width: 22%;
+} */
+
+.ui.card:last-child {
+  margin-bottom: 1em;
+}
+
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+  font-family: "Arial Narrow", Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-style: italic;
+  text-align: center;
+}
+
+.ui.card > .image,
+.ui.cards > .card > .image {
+  background: transparent;
+}
+
+.ui.card:first-child {
+  margin-top: 1em;
+}
+
+#character-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+}
+
+#main-container {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main-header {
+  text-align: center;
+  margin: 0.1em 0.1em 0 0.1em;
+  font-family: "Star Jedi";
+  font-size: 5em !important;
+}
+
+#main-subheader {
+  text-align: center;
+  margin: 10px 1em 0 1em;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.character-card {
+  min-width: 100px !important;
+  min-height: 117px !important;
+  flex-basis: 22%;
+}
+
+@media screen and (max-width: 550px) and (min-aspect-ratio: 5/8) {
+  .character-card {
+    flex-basis: 35%;
+  }
+  #main-header {
+    font-size: 10vw !important;
+  }
+
+  #main-subheader {
+    font-size: 4vw !important;
+  }
+
+  .ui.card > .content > .header:not(.ui) {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 768px) and (max-aspect-ratio: 5/8) {
+  .character-card {
+    flex-basis: 45%;
+    font-size: 3.5vw !important;
+  }
+
+  #main-container {
+    height: 100vh;
+  }
+
+  #main-header {
+    font-size: 12.5vw !important;
+  }
 }

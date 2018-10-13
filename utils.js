@@ -1,3 +1,10 @@
+function convertToFilename(name) {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(' ', '-');
+}
+
 function logErrorAndRespond(err, res, log, source, severity) {
   const customError = buildErrorPayload(err, source, severity);
   log.write(buildErrorLog(customError));
@@ -83,6 +90,7 @@ function extractIDsFromAPIRoutes(routes) {
 }
 
 module.exports = {
+  convertToFilename,
   groomFilmData,
   extractIDFromAPIRoute,
   extractIDsFromAPIRoutes,
