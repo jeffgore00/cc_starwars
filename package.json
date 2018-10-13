@@ -1,17 +1,12 @@
 {
-  "name": "senior-enrichment",
+  "name": "star-wars-code-challenge",
   "version": "0.0.1",
-  "description": "A review time project",
+  "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "index.js",
   "scripts": {
     "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
     "start": "node main"
   },
-  "keywords": [
-    "react",
-    "redux",
-    "skeleton"
-  ],
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.15.2",
