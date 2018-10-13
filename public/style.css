@@ -45,17 +45,17 @@
 }
 
 #main-header {
-  text-align: center;
   margin: 0.1em 0.1em 0 0.1em;
   font-family: "Star Jedi";
   font-size: 5em !important;
+  text-align: center;
   color: #fbe41f;
 }
 
 #main-subheader {
-  text-align: center;
   margin: 10px 1em 10px 1em;
   font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 #character-list {
@@ -80,21 +80,21 @@
 
 #film-header {
   width: 100vw;
+  max-width: 900px;
+  height: 5vh;
   overflow: hidden;
-  border-bottom: 1px solid black;
   position: fixed;
   top: 0;
   margin: 0 auto;
+  z-index: 5;
   padding: 5px;
   padding-right: 10px;
-  font-family: "Star Jedi";
-  height: 5vh;
-  max-width: 900px;
-  z-index: 5;
-  font-size: 4vh;
   display: flex;
   justify-content: space-between;
   background: white;
+  border-bottom: 1px solid black;
+  font-family: "Star Jedi";
+  font-size: 4vh;
 }
 
 #film-header-go-back {
@@ -135,8 +135,8 @@
 .ui.card > .content > .header,
 .ui.cards > .card > .content > .header {
   font-family: "Arial Narrow", Helvetica, sans-serif;
-  text-transform: uppercase;
   font-style: italic;
+  text-transform: uppercase;
   text-align: center;
   color: white;
 }

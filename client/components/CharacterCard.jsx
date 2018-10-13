@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import { convertToFilename } from '../../utils';
+import { convertToFilename } from '../utils-client';
 
 const CharacterCard = ({ name, onClick }) => (
   <Card className="character-card" onClick={onClick}>

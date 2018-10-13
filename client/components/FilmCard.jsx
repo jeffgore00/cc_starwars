@@ -1,6 +1,6 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
-import { romanize } from '../../utils';
+import { romanize } from '../utils-client';
 
 const FilmCard = ({ episode, title, date, desc }) => (
   <Item>

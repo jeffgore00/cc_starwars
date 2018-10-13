@@ -1,5 +1,5 @@
-import React from "react";
-import FilmList from "./FilmList";
+import React from 'react';
+import FilmList from './FilmList';
 
 const FilmListContainer = ({ handleCharacterDeselect, films, character }) => (
   <div id="film-container">

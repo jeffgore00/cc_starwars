@@ -8,14 +8,14 @@ const readFile = promisify(require('fs').readFile);
 
 /* DEPENDENCIES - INTERNAL */
 const { SWAPI_ADDRESS } = require('../constants');
-const { errorLog } = require('../utils');
 const {
+  errorLog,
   groomFilmData,
-  extractIDsFromAPIRoutes,
   buildErrorLog,
   buildErrorPayload,
   logErrorAndRespond
-} = require('../../utils');
+} = require('../utils-server');
+const { extractIDsFromAPIRoutes } = require('../../utils-shared');
 
 /* ROUTES */
 router.get('/characters', async (req, res, next) => {

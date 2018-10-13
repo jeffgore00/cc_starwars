@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   fetchCharacters,
   toggleCharacterSelection,
   charactersUpdated,
   fetchCharacterFilms,
   filmsCleared
-} from "../store";
-import CharacterListContainer from "./CharacterListContainer";
-import FilmListContainer from "./FilmListContainer";
+} from '../store';
+import CharacterListContainer from './CharacterListContainer';
+import FilmListContainer from './FilmListContainer';
 
 class Root extends Component {
   constructor() {

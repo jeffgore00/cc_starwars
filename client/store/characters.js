@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { errorReported } from './error';
-import { extractIDFromAPIRoute } from '../../utils';
+import { extractIDFromAPIRoute } from '../../utils-shared';
 
 /**
  * ACTION TYPES

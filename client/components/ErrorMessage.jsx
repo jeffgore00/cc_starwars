@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'semantic-ui-react';
 import { errorAcknowledged } from '../store';
-import { buildErrorMessage } from '../../utils';
+import { buildErrorMessage } from '../utils-client';
 
 class ErrorMessage extends Component {
   state = { modalOpen: true };
