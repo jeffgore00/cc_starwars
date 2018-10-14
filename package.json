@@ -2,10 +2,10 @@
   "name": "star-wars-code-challenge",
   "version": "0.0.1",
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
-    "start": "node main",
+    "start": "node main.js",
     "test": "NODE_ENV=testing mocha test --watch  --compilers js:babel-register -r jsdom-global/register",
     "deploy": "script/deploy"
   },
