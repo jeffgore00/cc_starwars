@@ -1,16 +1,6 @@
 const ERROR_REPORTED = 'ERROR_REPORTED';
 const ERROR_ACKNOWLEDGED = 'ERROR_ACKNOWLEDGED';
 
-/* When an error does occur...
-{
-  source: 'local' / 'SWAPI' / 'nointernet',
-  status: [status code]
-  severity:
-  message:
-}
-
-*/
-
 export const errorReported = error => ({
   type: ERROR_REPORTED,
   error
