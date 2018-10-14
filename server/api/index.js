@@ -84,7 +84,7 @@ async function fetchFilms(filmIds) {
     filmsLoaded.push(groomFilmData(film, filmId));
   }
   // If absolutely zero films loaded, that's a problem, since SWAPI is based on
-  // the films. This should be a blocking error; the user should be able to see
+  // the films. This should be a blocking error; the user should not be able to see
   // an empty films page.
   if (!filmsLoaded.length) {
     throw new Error('No films loaded!');
