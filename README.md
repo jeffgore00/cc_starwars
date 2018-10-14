@@ -8,7 +8,7 @@ The app runs on a Node/Express server which uses React and Redux on the front en
 
 In short, the app allows the user to choose a character from the Star Wars films, which should yield a list of films in which the character appears, as well as some details about those films.
 
-One of the constraints of the challenge is that a bare-bones `characters.json` file, stored in the root directory of this project, must be used as the source for all data fetching - the file only contains an array of four characters names, each paired with their API endpoint at the [Star Wars API](https://swapi.co/) (SWAPI).
+One of the constraints of the challenge is that a bare-bones `characters.json` file, stored in the root directory of this project, must be used as the source for all data fetching - the file only contains an array of four characters, each paired with their API endpoint at the [Star Wars API](https://swapi.co/) (SWAPI).
 
 Clicking on a character makes a call to SWAPI for more character details, which yields the API endpoints for their films, which then results in a second request for film details.
 
@@ -25,7 +25,7 @@ One of the characters in the provided JSON, Obi-Wan, has a purposefully incorrec
 - **UI / Design**:
 
   - The UI makes use of CSS flexbox and media queries to provide a design that is visually pleasing (IMO) on mobile or desktop devices.
-  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) [Luke/Obi-Wan](https://www.behance.net/gallery/31852193/Star-Wars-Line-Icons), (2) [R2-D2/Vader](https://iconstore.co/icons/star-wars-icons/).
+  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) [Luke/Obi-Wan](https://www.behance.net/gallery/31852193/Star-Wars-Line-Icons), (2) [R2-D2/Vader](https://iconstore.co/icons/star-wars-icons/)).
 
 - **DRY / reusable code**
   - Utility functions for client, server, and both, that abstract some messy details of data manipulation, data fetching, and error logging.
