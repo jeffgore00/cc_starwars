@@ -1,3 +1,6 @@
+const { promisify } = require('util');
+const readFile = promisify(require('fs').readFile);
+
 const errorLog = require('fs').createWriteStream('errors.log', { flags: 'a' });
 
 function logErrorAndRespond(err, res, log, source, severity) {
@@ -44,6 +47,7 @@ function groomFilmData(rawFilm, id) {
 
 module.exports = {
   errorLog,
+  readFile,
   logErrorAndRespond,
   buildErrorPayload,
   buildErrorLog,

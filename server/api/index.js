@@ -2,14 +2,13 @@
 /* DEPENDENCIES - EXTERNAL */
 const router = require('express').Router();
 const request = require('request-promise');
-const { promisify } = require('util');
 const path = require('path');
-const readFile = promisify(require('fs').readFile);
 
 /* DEPENDENCIES - INTERNAL */
 const { SWAPI_ADDRESS } = require('../constants');
 const {
   errorLog,
+  readFile,
   groomFilmData,
   buildErrorLog,
   buildErrorPayload,
@@ -32,6 +31,8 @@ router.get('/characters', async (req, res, next) => {
 });
 
 router.get('/characters/:id/films', async (req, res, next) => {
+  // Larger try/catch for local server errors, nested try/catches for SWAPI
+  // API calls...
   try {
     let characterData;
     // Fetch character data from SWAPI first
