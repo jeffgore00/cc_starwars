@@ -8,7 +8,7 @@ The app runs on a Node/Express server which uses React and Redux on the front en
 
 In short, the app allows the user to choose a character from the Star Wars films, which should yield a list of films in which the character appears, as well as some details about those films.
 
-One of the constraints of the challenge is that a bare-bones `characters.json` file, stored in the root directory of this project, must be used as the source for all data fetching - the file only contains an array of four characters names, each paired with their API endpoint at the [Star Wars API](https://swapi.co/) (SWAPI).
+One of the constraints of the challenge is that a bare-bones `characters.json` file, stored in the root directory of this project, must be used as the source for all data fetching - the file only contains an array of four characters, each paired with their API endpoint at the [Star Wars API](https://swapi.co/) (SWAPI).
 
 Clicking on a character makes a call to SWAPI for more character details, which yields the API endpoints for their films, which then results in a second request for film details.
 
