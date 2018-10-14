@@ -1,7 +1,8 @@
 /* CUSTOM FONTS */
 @font-face {
   font-family: "Star Jedi";
-  src: url("fonts/Starjedi.ttf") format("ttf");
+  src: url("fonts/Starjedi.woff") format("woff"),
+    url("fonts/Starjedi.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

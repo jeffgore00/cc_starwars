@@ -1,6 +1,6 @@
 {
   "name": "star-wars-code-challenge",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "deploy": "script/deploy"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jeff Gore",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
