@@ -18,18 +18,18 @@ One of the characters in the provided JSON, Obi-Wan, has a purposefully incorrec
 
 - **Node/Express server**: This project is probably simple enough to create without running my own server, but I decided to do so for a variety of reasons:
 
-  - More fine-tuned error handling when dealing with SWAPI requests
   - Keeping "business logic" / data grooming separate from view logic on front end
   - Imposing uniformity and simplicity on fetch requests from the front-end
+  - More fine-tuned error handling when dealing with SWAPI requests - for instance, attempting to load all movies, and only displaying an error modal if zero movies are returned (which means that if one of seven movie requests results in an error, we can still show the six that we _do_ have to the user).
 
 - **UI / Design**:
 
   - The UI makes use of CSS flexbox and media queries to provide a design that is visually pleasing (IMO) on mobile or desktop devices.
-  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) Luke/Obi-Wan, (2) R2-D2/Vader).
+  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) [Luke/Obi-Wan](https://www.behance.net/gallery/31852193/Star-Wars-Line-Icons), (2) [R2-D2/Vader](https://iconstore.co/icons/star-wars-icons/).
 
 - **DRY / reusable code**
   - Utility functions for client, server, and both, that abstract some messy details of data manipulation, data fetching, and error logging.
-  - Redux "selector" functions which are sufficiently abstract as to be access characters by any conceivable criteria.
+  - Redux "selector" functions which are sufficiently abstract as to be able to access the `characters` portion of application state by any conceivable criteria.
   - High-level functions, such as `logErrorAndRespond`, which group operations that are almost always executed in tandem.
 
 ## "Areas for Improvement":
