@@ -6,7 +6,8 @@
   "scripts": {
     "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
     "start": "node main",
-    "test": "NODE_ENV=testing mocha test --watch  --compilers js:babel-register -r jsdom-global/register"
+    "test": "NODE_ENV=testing mocha test --watch  --compilers js:babel-register -r jsdom-global/register",
+    "deploy": "script/deploy"
   },
   "dependencies": {
     "axios": "^0.18.0",
