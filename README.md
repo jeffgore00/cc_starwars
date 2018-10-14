@@ -25,7 +25,7 @@ One of the characters in the provided JSON, Obi-Wan, has a purposefully incorrec
 - **UI / Design**:
 
   - The UI makes use of CSS flexbox and media queries to provide a design that is visually pleasing (IMO) on mobile or desktop devices.
-  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) [Luke/Obi-Wan](https://www.behance.net/gallery/31852193/Star-Wars-Line-Icons), (2) [R2-D2/Vader](https://iconstore.co/icons/star-wars-icons/).
+  - Generally, I prefer vector art and illustration over photography when supplying imagery to a website, so I took a lot of time to find the right icons for the characters, with some tweaking in Adobe Illustrator (such as Offset Path to thin the lines). (Sources: (1) [Luke/Obi-Wan](https://www.behance.net/gallery/31852193/Star-Wars-Line-Icons), (2) [R2-D2/Vader](https://iconstore.co/icons/star-wars-icons/)).
 
 - **DRY / reusable code**
   - Utility functions for client, server, and both, that abstract some messy details of data manipulation, data fetching, and error logging.
