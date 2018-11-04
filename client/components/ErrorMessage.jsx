@@ -22,7 +22,7 @@ class ErrorMessage extends Component {
         size="small"
         className="error-message"
       >
-        <img className="error-icon" src="images/icon_deathstar_white.png" />
+        <img className="error-icon" src="images/icon_deathstar.png" />
         <Modal.Content>{buildErrorMessage(source, statusCode)}</Modal.Content>
         <Modal.Actions>
           <Button color="blue" onClick={this.handleClose} inverted>
