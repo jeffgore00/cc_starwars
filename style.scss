@@ -1,15 +1,12 @@
-@import '_mixins';
+@import url('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css');
 
-/* CUSTOM FONTS */
-
-@include font-face(
-  'Star Jedi',
-  './public/fonts/Starjedi',
-  null,
-  normal,
-  woff ttf
-);
-
+@font-face {
+  font-family: 'Star Jedi';
+  src: url('./public/fonts/Starjedi.woff') format('woff'),
+    url('./public/fonts/Starjedi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /* CUSTOM CLASSES AND IDs */
 
 .error-icon {
