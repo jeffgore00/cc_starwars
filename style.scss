@@ -135,13 +135,15 @@
   }
 }
 
-.ui.card > .content > .header,
-.ui.cards > .card > .content > .header {
-  font-family: 'Arial Narrow', Helvetica, sans-serif;
-  font-style: italic;
-  text-transform: uppercase;
-  text-align: center;
-  color: white;
+.ui.card,
+.ui.cards > .card {
+  > .content > .header {
+    font-family: 'Arial Narrow', Helvetica, sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+  }
 }
 
 .ui.card,
@@ -150,17 +152,21 @@
   margin: 0;
 }
 
-.ui.cards a.card:hover,
-.ui.link.card:hover,
-.ui.link.cards .card:hover,
-a.ui.card:hover {
-  background: transparent;
-  transform: none;
+.ui.cards a.card,
+.ui.link.card,
+.ui.link.cards .card,
+a.ui.card {
+  &:hover {
+    background: darkblue;
+    transform: none;
+  }
 }
 
-.ui.card > .image,
-.ui.cards > .card > .image {
-  background: transparent;
+.ui.card,
+.ui.cards > .card {
+  > .image {
+    background: transparent;
+  }
 }
 
 /* CONDITIONAL DISPLAY FOR SCREEN SIZE VARIATION */
