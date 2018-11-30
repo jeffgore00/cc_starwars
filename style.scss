@@ -1,11 +1,14 @@
+@import '_mixins';
+
 /* CUSTOM FONTS */
-@font-face {
-  font-family: "Star Jedi";
-  src: url("fonts/Starjedi.woff") format("woff"),
-    url("fonts/Starjedi.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+
+@include font-face(
+  'Star Jedi',
+  './public/fonts/Starjedi',
+  null,
+  normal,
+  woff ttf
+);
 
 /* CUSTOM CLASSES AND IDs */
 
@@ -47,7 +50,7 @@
 
 #main-header {
   margin: 0.1em 0.1em 0 0.1em;
-  font-family: "Star Jedi";
+  font-family: 'Star Jedi';
   font-size: 5em !important;
   text-align: center;
   color: #fbe41f;
@@ -94,7 +97,7 @@
   justify-content: space-between;
   background: white;
   border-bottom: 1px solid black;
-  font-family: "Star Jedi";
+  font-family: 'Star Jedi';
   font-size: 4vh;
 }
 
@@ -129,13 +132,15 @@
 
 /* SEMANTIC UI OVERWRITES */
 
-.ui.modal > .actions {
-  text-align: center;
+.ui.modal {
+  > .actions {
+    text-align: center;
+  }
 }
 
 .ui.card > .content > .header,
 .ui.cards > .card > .content > .header {
-  font-family: "Arial Narrow", Helvetica, sans-serif;
+  font-family: 'Arial Narrow', Helvetica, sans-serif;
   font-style: italic;
   text-transform: uppercase;
   text-align: center;
