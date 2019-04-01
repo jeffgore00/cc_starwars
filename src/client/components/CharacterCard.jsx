@@ -4,7 +4,7 @@ import { convertToFilename } from '../utils-client';
 
 const CharacterCard = ({ name, onClick }) => (
   <Card className="character-card" onClick={onClick}>
-    <Image src={`images/icon_${convertToFilename(name)}.png`} />
+    <Image src={`/images/icon_${convertToFilename(name)}.png`} />
     <Card.Content>
       <Card.Header>{name}</Card.Header>
     </Card.Content>
