@@ -4,7 +4,7 @@
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "main.js",
   "scripts": {
-    "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
+    "start-dev": "webpack -w & nodemon ./src/main.js -e html,js,css --ignore public",
     "start": "node main.js",
     "test": "jest",
     "deploy": "script/deploy"
@@ -32,8 +32,11 @@
     "semantic-ui-react": "^0.82.5"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
     "amex-jest-preset-react": "^5.0.1",
     "axios-mock-adapter": "^1.15.0",
+    "babel-loader": "^8.0.5",
     "babel-preset-amex": "^2.0.0",
     "enzyme": "^3.9.0",
     "enzyme-to-json": "^3.3.5",

@@ -2,12 +2,12 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-import { readFile } from '../server/utils-server';
+import { readFile } from '../src/server/utils-server';
 import {
   reducer,
   addAdminPropsToCharacters,
   fetchCharacters
-} from '../client/store';
+} from '../src/client/store';
 
 const path = require('path');
 const middlewares = [thunkMiddleware];
@@ -21,7 +21,7 @@ const store = mockStore(initialState);
 
 async function loadCharacterFile() {
   const characterJSON = await readFile(
-    path.join(__dirname, '../characters.json'),
+    path.join(__dirname, '../src/characters.json'),
     'utf-8'
   );
   return characterJSON;
