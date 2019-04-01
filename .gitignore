@@ -13,3 +13,7 @@ errors.log
 
 # Local machine files
 .DS_Store
+
+# Test
+test-results
+.jest-cache

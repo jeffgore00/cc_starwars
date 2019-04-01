@@ -2,7 +2,6 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-import { expect } from 'chai';
 import { readFile } from '../server/utils-server';
 import {
   reducer,
@@ -33,7 +32,7 @@ let initialCharacters;
 let groomedCharacters;
 
 describe('Redux Store', () => {
-  before(async () => {
+  beforeAll(async () => {
     charactersJSON = await loadCharacterFile();
     const parsedJSON = JSON.parse(charactersJSON);
     initialCharacters = parsedJSON.characters;
@@ -51,24 +50,24 @@ describe('Redux Store', () => {
 
   it('addAdminPropsToCharacters() should add "id", "selected", and "order" properties', () => {
     const updatedCharacters = addAdminPropsToCharacters(initialCharacters);
-    expect(updatedCharacters[0].selected).to.equal(false);
-    expect(updatedCharacters[0].order).to.equal(1);
-    expect(updatedCharacters[0].id).to.equal(1);
+    expect(updatedCharacters[0].selected).toEqual(false);
+    expect(updatedCharacters[0].order).toEqual(1);
+    expect(updatedCharacters[0].id).toEqual(1);
   });
 
   it('addAdminPropsToCharacters() should retain existing character properties "name" and "url"', () => {
     const updatedCharacters = addAdminPropsToCharacters(initialCharacters);
 
-    expect(updatedCharacters[0].name).to.equal('Luke Skywalker');
-    expect(updatedCharacters[0].url).to.equal('https://swapi.co/api/people/1/');
+    expect(updatedCharacters[0].name).toEqual('Luke Skywalker');
+    expect(updatedCharacters[0].url).toEqual('https://swapi.co/api/people/1/');
   });
 
   it('fetchCharacters() returns a thunk which make a GET request to the /api/characters route and dispatches a CHARACTERS_LOADED action', async () => {
     mock.onGet('/api/characters').replyOnce(200, initialCharacters);
     await store.dispatch(fetchCharacters());
     const actions = store.getActions();
-    expect(actions[0].type).to.equal('CHARACTERS_LOADED');
-    expect(actions[0].characters).to.deep.equal(groomedCharacters);
+    expect(actions[0].type).toEqual('CHARACTERS_LOADED');
+    expect(actions[0].characters).toEqual(groomedCharacters);
   });
 });
 
@@ -78,6 +77,6 @@ describe('reducer', () => {
       type: 'CHARACTERS_LOADED',
       characters: groomedCharacters
     });
-    expect(newState.characters).to.deep.equal(groomedCharacters);
+    expect(newState.characters).toEqual(groomedCharacters);
   });
 });
