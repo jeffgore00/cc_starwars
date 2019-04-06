@@ -11,7 +11,7 @@ import CharacterListContainer from './CharacterListContainer';
 import FilmListContainer from './FilmListContainer';
 import { getCharacter, selected } from '../store/characters';
 
-class Root extends Component {
+export class Root extends Component {
   constructor() {
     super();
     this.handleCharacterSelect = this.handleCharacterSelect.bind(this);
