@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import CharacterList from '../../../src/client/components/CharacterList';
 import CharacterCard from '../../../src/client/components/CharacterCard';
 import Loading from '../../../src/client/components/Loading';

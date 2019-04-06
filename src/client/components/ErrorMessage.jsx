@@ -6,12 +6,15 @@ import { buildErrorMessage } from '../utils-client';
 
 class ErrorMessage extends Component {
   state = { modalOpen: true };
+
   handleOpen = () => this.setState({ modalOpen: true });
+
   handleClose = () => {
     this.props.acknowledgeError();
     this.props.execRollbackActions();
     this.setState({ modalOpen: false });
   };
+
   render() {
     const { source, statusCode } = this.props.error;
     return (
