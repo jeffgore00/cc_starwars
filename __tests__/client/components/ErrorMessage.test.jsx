@@ -5,7 +5,8 @@ import ErrorMessage from '../../../src/client/components/ErrorMessage';
 
 const store = {
   getState: jest.fn(),
-  dispatch: jest.fn()
+  dispatch: jest.fn(),
+  subscribe: jest.fn()
 };
 
 const acknowledgeError = jest.fn(() => store.dispatch('errorAcknowledged'));
@@ -40,7 +41,6 @@ describe('The ErrorMessage Component', () => {
       .dive()
       .instance()
       .handleClose();
-    console.log(errorMessage.props())
     expect(store.dispatch).toHaveBeenCalledWith({"error": null, "type": "ERROR_ACKNOWLEDGED"});
     expect(execRollbackActions).toHaveBeenCalled();
   });

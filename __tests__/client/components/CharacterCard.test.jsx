@@ -12,18 +12,3 @@ describe('CharacterCard ', () => {
     //expect(card.find(Card)) alone, for truthiness, never works, because it always returns a ReactWrapper
   });
 });
-
-/* import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
-import { convertToFilename } from '../utils-client';
-
-const CharacterCard = ({ name, onClick }) => (
-  <Card className="character-card" onClick={onClick}>
-    <Image src={`/images/icon_${convertToFilename(name)}.png`} />
-    <Card.Content>
-      <Card.Header>{name}</Card.Header>
-    </Card.Content>
-  </Card>
-);
-
-export default CharacterCard; */

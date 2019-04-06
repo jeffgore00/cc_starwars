@@ -17,7 +17,7 @@ describe('CharacterList ', () => {
   });
 
   it('should not render a loader if selectedCharacter is false and no error exists', () => {
-    const list = shallow(<CharacterList characters={['Obi', 'Luke']} />);
+    const list = shallow(<CharacterList characters={[{ id: 1, name: 'Obi Wan Kenobi' }]} />);
     expect(list.exists(Loading)).toBe(false);
   });
 
@@ -41,7 +41,7 @@ describe('CharacterList ', () => {
     const list = shallow(
       <CharacterList
         handleCharacterSelect={handleCharacterSelect}
-        characters={[{ id: 1, name: 'Obi Wan Kenobi' }]}
+        characters={[{ id: 1, name: 'Obi Wan Kenobi' }, { id: 2, name: 'Luke Skywalker' }]}
       />
     );
     const card = list.find(CharacterCard).first();
