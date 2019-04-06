@@ -16,7 +16,7 @@ const props = {
       id: 5,
       episodeId: 5,
       title: 'The Empire Strikes Back',
-      date: new Date('1977-05-25'),
+      date: new Date('1980-05-21'),
       desc: 'An even funner ROMP through the universe.'
     }
   ]
