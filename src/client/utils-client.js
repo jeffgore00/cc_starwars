@@ -10,7 +10,7 @@ export function buildErrorMessage(source, statusCode) {
     if (source === 'SWAPI') {
       return 'The requested content could not be found on the SWAPI server.';
     } else {
-      return 'That requested content could not be found.';
+      return 'The requested content could not be found.';
     }
   } else if (statusCode === 500) {
     if (source === 'SWAPI') {

@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 describe('Main ', () => {
   it('gives control of the <div id="main"> to React', () => {
