@@ -1,4 +1,3 @@
-import request from 'supertest';
 import utils, { groomFilmData } from '../../src/server/utils-server';
 
 describe('groomFilmData', () => {
@@ -17,7 +16,7 @@ describe('groomFilmData', () => {
 });
 
 describe('fetchFilms', () => {
-  it('does the right thing', () => {
+  it('throws an error if no films are loaded', () => {
     jest.mock('request-promise', () =>
       jest.fn(() => Promise.reject(new Error('request-promise failed')))
     );

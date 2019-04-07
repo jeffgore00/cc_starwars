@@ -57,7 +57,6 @@ router.get('/characters/:id/films', async (req, res, next) => {
     // If the above request is successful, use film routes contained in character
     // data payload to fetch film data.
     const { films } = characterData;
-    console.log(extractIDsFromAPIRoutes)
     const filmIds = extractIDsFromAPIRoutes(films);
     try {
       const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
