@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const { errorLog, logErrorAndRespond } = './utils-server.js';
+const { errorLog, logErrorAndRespond } = require('./utils-server.js');
 
 const app = express();
 

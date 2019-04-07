@@ -6,14 +6,23 @@ const path = require('path');
 
 /* DEPENDENCIES - INTERNAL */
 const { SWAPI_ADDRESS } = require('../constants');
-const {
+import {
   errorLog,
   readFile,
   groomFilmData,
   buildErrorLog,
   buildErrorPayload,
   logErrorAndRespond
-} = require('../utils-server');
+} from '../utils-server';
+// // for some reason CommonJS cannot be mocked by jest ...
+// const {
+//   errorLog,
+//   readFile,
+//   groomFilmData,
+//   buildErrorLog,
+//   buildErrorPayload,
+//   logErrorAndRespond
+// } = require('../utils-server')
 const { extractIDsFromAPIRoutes } = require('../../utils-shared');
 
 /* ROUTES */
