@@ -1,12 +1,13 @@
 import request from 'supertest';
 import app from '../../../src/server';
-import * as requestPromise from 'request-promise'
+import utils from '../../../src/server/utils-server';
+import utilsShared from '../../../src/utils-shared';
 
 jest.setTimeout(10000);
 
-beforeEach
-
 describe('API routes', () => {
+  beforeEach(() => jest.resetModules());
+
   it('retrieves characters', () => {
     return request(app)
       .get('/api/characters')
@@ -75,16 +76,67 @@ describe('API routes', () => {
   });
 
   it('handles errors retrieving character details - SWAPI', () => {
-    // jest.spyOn(requestPromise, 'default').mockImplementationOnce(() => Promise.reject())
-
-    // return request(app)
-    //   .get('/api/characters/3/films')
-    //   .then(res => {
-    //     expect(res.status).toEqual(404)
-    //   });
+    jest.mock('request-promise', () =>
+      jest.fn(() => Promise.reject(new Error('request-promise failed')))
+    );
+    const app = require('../../../src/server');
+    return request(app)
+      .get('/api/characters/1/films')
+      .then(res => {
+        expect(res.status).toEqual(500);
+      });
   });
 
-  it('handles errors retrieving character films (all) - SWAPI', () => {});
+  it('handles errors retrieving character films (all) - SWAPI', () => {
+    const error = new Error('hi')
+    error.options = {
+      uri: 'http://error.com' // simply for code coverage
+    }
+    jest
+      .spyOn(utils, 'fetchFilms')
+      .mockImplementationOnce(() => Promise.reject(error));
+    return request(app)
+      .get('/api/characters/3/films')
+      .then(res => {
+        expect(res.status).toEqual(500);
+      });
+  });
 
-  it('handles errors retrieving character films (some) - SWAPI', () => {});
+  it('handles errors retrieving character films (some) - SWAPI', () => {
+    jest.spyOn(utils, 'fetchFilms').mockImplementationOnce(() => {
+      return {
+        filmsLoaded: [
+          {
+            id: 4,
+            episodeId: 4,
+            title: 'A New Hope',
+            date: new Date('1977-05-25'),
+            desc: 'A fun ROMP through the universe.'
+          }
+        ],
+        filmsFailedToLoad: [new Error('film failed to load')]
+      };
+    });
+    return request(app)
+      .get('/api/characters/3/films')
+      .then(res => {
+        expect(res.status).toEqual(200);
+      });
+  });
+
+  it('handles general errors', () => {
+    jest.spyOn(utilsShared, 'extractIDsFromAPIRoutes').mockImplementationOnce(
+      jest.fn(() => {
+        throw new Error('hi');
+      })
+    );
+
+    jest.spyOn(console, 'error').mockImplementationOnce(() => {});
+
+    return request(app)
+      .get('/api/characters/3/films')
+      .then(res => {
+        expect(res.status).toEqual(500);
+      });
+  });
 });

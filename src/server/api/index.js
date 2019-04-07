@@ -9,7 +9,7 @@ const { SWAPI_ADDRESS } = require('../constants');
 import {
   errorLog,
   readFile,
-  groomFilmData,
+  fetchFilms,
   buildErrorLog,
   buildErrorPayload,
   logErrorAndRespond
@@ -18,12 +18,12 @@ import {
 // const {
 //   errorLog,
 //   readFile,
-//   groomFilmData,
+//   fetchFilms,
 //   buildErrorLog,
 //   buildErrorPayload,
 //   logErrorAndRespond
 // } = require('../utils-server')
-const { extractIDsFromAPIRoutes } = require('../../utils-shared');
+import { extractIDsFromAPIRoutes } from '../../utils-shared';
 
 /* ROUTES */
 router.get('/characters', async (req, res, next) => {
@@ -57,6 +57,7 @@ router.get('/characters/:id/films', async (req, res, next) => {
     // If the above request is successful, use film routes contained in character
     // data payload to fetch film data.
     const { films } = characterData;
+    console.log(extractIDsFromAPIRoutes)
     const filmIds = extractIDsFromAPIRoutes(films);
     try {
       const { filmsLoaded, filmsFailedToLoad } = await fetchFilms(filmIds);
@@ -76,36 +77,5 @@ router.get('/characters/:id/films', async (req, res, next) => {
   }
 });
 
-/* ROUTE HELPERS */
-async function fetchFilms(filmIds) {
-  const filmsFailedToLoad = [];
-  const filmsLoaded = [];
-  for (const filmId of filmIds) {
-    let film;
-    try {
-      film = await request({
-        uri: `${SWAPI_ADDRESS}/films/${filmId}`,
-        json: true
-      });
-    } catch (err) {
-      filmsFailedToLoad.push(err);
-    }
-    filmsLoaded.push(groomFilmData(film, filmId));
-  }
-  // If absolutely zero films loaded, that's a problem, since SWAPI is based on
-  // the films. This should be a blocking error; the user should not be able to see
-  // an empty films page.
-  if (!filmsLoaded.length) {
-    throw new Error('No films loaded!');
-  } else {
-    // Otherwise, one or more of the films may have failed, which we should know about,
-    // but we don't need to nuke the user experience entirely because a subset
-    // of films is missing. We will still note the error in our server error log.
-    return {
-      filmsLoaded,
-      filmsFailedToLoad
-    };
-  }
-}
 
 module.exports = router;
