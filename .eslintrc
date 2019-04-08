@@ -10,5 +10,5 @@
     "afterAll": true
   },
 
-  "extends": ["amex", "prettier", "prettier/react", "prettier/unicorn"]
+  "extends": ["amex", "prettier", "prettier/react"]
 }
