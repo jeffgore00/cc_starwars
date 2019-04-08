@@ -39,7 +39,7 @@ export const fetchCharacters = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = [], action) {
+export default function reducer(state = [], action) {
   switch (action.type) {
     case CHARACTERS_LOADED:
     case CHARACTERS_UPDATED:
@@ -69,7 +69,7 @@ export function addAdminPropsToCharacters(characters) {
 export function getCharacter(characters, rule, ...ruleProps) {
   const selectedCharacters = characters.filter(character =>
     rule(character, ...ruleProps));
-  return selectedCharacters.length ? selectedCharacters[0] : null;
+  return selectedCharacters.length > 0 ? selectedCharacters[0] : null;
 }
 
 export function getCharacters(characters, rule, ...ruleProps) {

@@ -1,5 +1,8 @@
-function extractIDFromAPIRoute(route) {
-  const secondToLastSlash = route.lastIndexOf("/", route.length - 2);
+/* eslint-disable no-restricted-globals */
+import PropTypes from 'prop-types';
+
+export function extractIDFromAPIRoute(route) {
+  const secondToLastSlash = route.lastIndexOf('/', route.length - 2);
   const idStr = route.slice(secondToLastSlash + 1, route.length - 1);
   const id = Number(idStr);
   return isNaN(id) ? idStr : id;
@@ -19,11 +22,22 @@ function extractIDFromAPIRoute(route) {
   */
 }
 
-function extractIDsFromAPIRoutes(routes) {
+export function extractIDsFromAPIRoutes(routes) {
   return routes.map(route => extractIDFromAPIRoute(route));
 }
 
-module.exports = {
-  extractIDFromAPIRoute,
-  extractIDsFromAPIRoutes
-};
+export const characterShape = PropTypes.shape({
+  id: PropTypes.any, // to allow purposeful "unknown" Obi bug through
+  name: PropTypes.string,
+  order: PropTypes.number,
+  selected: PropTypes.bool,
+  url: PropTypes.string
+});
+
+export const filmShape = PropTypes.shape({
+  date: PropTypes.date,
+  desc: PropTypes.string,
+  episodeId: PropTypes.number,
+  id: PropTypes.any,
+  title: PropTypes.string
+});

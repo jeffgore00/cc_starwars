@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../../../src/server';
 import utils from '../../../src/server/utils-server';
-import utilsShared from '../../../src/utils-shared';
+import * as utilsShared from '../../../src/utils-shared';
 
 jest.setTimeout(10000);
 
