@@ -24,13 +24,15 @@ describe('The ErrorMessage Component', () => {
     expect(errorMessage.exists(Modal)).toBe(true);
   });
 
-  it("sets the modal's modalOpen state to true on handleOpen", () => {
-    const errorMessage = shallow(<ErrorMessage store={store} error={error} />);
+  it("sets the modal's modalOpen state to false on handleClose", () => {
+    const errorMessage = mount(
+      <ErrorMessage store={store} error={error} {...errorHandlers} />
+    );
     errorMessage
-      .dive()
+      .childAt(0)
       .instance()
-      .handleOpen();
-    expect(errorMessage.dive().state('modalOpen')).toBe(true);
+      .handleClose();
+    expect(errorMessage.childAt(0).state('modalOpen')).toBe(false);
   });
 
   it('calls the acknowledgeError and execRollbackActions funcs on handleClose', () => {
@@ -41,7 +43,10 @@ describe('The ErrorMessage Component', () => {
       .dive()
       .instance()
       .handleClose();
-    expect(store.dispatch).toHaveBeenCalledWith({"error": null, "type": "ERROR_ACKNOWLEDGED"});
+    expect(store.dispatch).toHaveBeenCalledWith({
+      error: null,
+      type: 'ERROR_ACKNOWLEDGED'
+    });
     expect(execRollbackActions).toHaveBeenCalled();
   });
 
