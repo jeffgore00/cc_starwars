@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import CharacterList from './CharacterList';
+import { characterShape } from '../../utils-shared'
 
 const CharacterListContainer = ({
   characters,
@@ -24,5 +26,20 @@ const CharacterListContainer = ({
     </div>
   </div>
 );
+
+CharacterListContainer.defaultProps = {
+  characters: null,
+  selectedCharacter: null,
+  error: null,
+}
+
+CharacterListContainer.propTypes = {
+  characters: PropTypes.arrayOf(characterShape),
+  handleCharacterSelect: PropTypes.func.isRequired,
+  handleCharacterDeselect: PropTypes.func.isRequired,
+  selectedCharacter: characterShape,
+  error: PropTypes.string,
+}
+
 
 export default CharacterListContainer;

@@ -9,6 +9,6 @@ describe('CharacterCard ', () => {
       <CharacterCard key="1" name="Emperor Palpatine" />
     );
     expect(card.exists(Card)).toBe(true);
-    //expect(card.find(Card)) alone, for truthiness, never works, because it always returns a ReactWrapper
+    // expect(card.find(Card)) alone, for truthiness, never works, because it always returns a ReactWrapper
   });
 });
