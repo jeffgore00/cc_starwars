@@ -3,8 +3,8 @@ import { shallow, mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 import ConnectedRoot, { Root } from '../../../src/client/components/Root';
-import FilmListContainer from '../../../src/client/components/FilmListContainer';
-import CharacterListContainer from '../../../src/client/components/CharacterListContainer';
+import FilmListPage from '../../../src/client/components/FilmListPage';
+import CharacterPage from '../../../src/client/components/CharacterPage';
 import {
   fetchCharacters,
   toggleCharacterSelection,
@@ -58,21 +58,21 @@ const defaultProps = {
 };
 
 describe('Root ', () => {
-  it('should render a <CharacterListContainer> by default', () => {
+  it('should render a <CharacterPage> by default', () => {
     const component = shallow(<Root {...defaultProps} />);
-    expect(component.exists(CharacterListContainer)).toBe(true);
-    expect(component.exists(FilmListContainer)).toBe(false);
+    expect(component.exists(CharacterPage)).toBe(true);
+    expect(component.exists(FilmListPage)).toBe(false);
   });
 
-  it('should render a <FilmListContainer> if selectedCharacter and films.length is true', () => {
+  it('should render a <FilmListPage> if selectedCharacter and films.length is true', () => {
     const component = shallow(
       <Root
         {...defaultProps}
         selectedCharacter={{ id: 1, name: 'Obi Wan Kenobi' }}
       />
     );
-    expect(component.exists(FilmListContainer)).toBe(true);
-    expect(component.exists(CharacterListContainer)).toBe(false);
+    expect(component.exists(FilmListPage)).toBe(true);
+    expect(component.exists(CharacterPage)).toBe(false);
   });
 });
 

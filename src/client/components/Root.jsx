@@ -8,8 +8,8 @@ import {
   fetchCharacterFilms,
   filmsCleared
 } from '../store';
-import CharacterListContainer from './CharacterListContainer';
-import FilmListContainer from './FilmListContainer';
+import CharacterPage from './CharacterPage';
+import FilmListPage from './FilmListPage';
 import { getCharacter, selected } from '../store/characters';
 import { characterShape, filmShape } from '../../utils-shared'
 
@@ -42,13 +42,13 @@ export class Root extends Component {
     return (
       <div>
         {selectedCharacter && films.length > 0 ? (
-          <FilmListContainer
+          <FilmListPage
             character={selectedCharacter}
             films={films}
             handleCharacterDeselect={this.handleCharacterDeselect}
           />
         ) : (
-          <CharacterListContainer
+          <CharacterPage
             characters={characters}
             handleCharacterSelect={this.handleCharacterSelect}
             handleCharacterDeselect={this.handleCharacterDeselect}
