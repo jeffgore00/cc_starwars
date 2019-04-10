@@ -10,14 +10,14 @@ const CharacterListPage = ({
   selectedCharacter,
   error
 }) => (
-  <div id="entire-page-wrapper">
+  <div id="entirepage-wrapper">
     <div id="main-container">
       <h1 id="main-header">STAR WARS</h1>
       <h2 id="main-subheader">
         Select a character to view a list of films in which they appear.
       </h2>
       <CharacterList
-        characters={characters}
+        character={characters}
         handleCharacterSelect={handleCharacterSelect}
         handleCharacterDeselect={handleCharacterDeselect}
         selectedCharacter={selectedCharacter}
