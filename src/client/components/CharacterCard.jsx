@@ -4,9 +4,9 @@ import { Card, Image } from 'semantic-ui-react';
 import { convertToFilename } from '../utils-client';
 
 const CharacterCard = ({ name, onClick }) => (
-  <Card className="character-card" onClick={onClick}>
+  <Card className="character-card">
     <Image src={`/images/icon_${convertToFilename(name)}.png`} />
-    <Card.Content>
+    <Card.Content onClick={onClick}>
       <Card.Header>{name}</Card.Header>
     </Card.Content>
   </Card>
