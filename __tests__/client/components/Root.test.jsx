@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 import ConnectedRoot, { Root } from '../../../src/client/components/Root';
 import FilmListPage from '../../../src/client/components/FilmListPage';
-import CharacterPage from '../../../src/client/components/CharacterPage';
+import CharacterListPage from '../../../src/client/components/CharacterListPage';
 import {
   fetchCharacters,
   toggleCharacterSelection,
@@ -58,9 +58,9 @@ const defaultProps = {
 };
 
 describe('Root ', () => {
-  it('should render a <CharacterPage> by default', () => {
+  it('should render a <CharacterListPage> by default', () => {
     const component = shallow(<Root {...defaultProps} />);
-    expect(component.exists(CharacterPage)).toBe(true);
+    expect(component.exists(CharacterListPage)).toBe(true);
     expect(component.exists(FilmListPage)).toBe(false);
   });
 
@@ -72,7 +72,7 @@ describe('Root ', () => {
       />
     );
     expect(component.exists(FilmListPage)).toBe(true);
-    expect(component.exists(CharacterPage)).toBe(false);
+    expect(component.exists(CharacterListPage)).toBe(false);
   });
 });
 

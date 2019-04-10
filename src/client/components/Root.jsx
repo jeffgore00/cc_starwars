@@ -8,7 +8,7 @@ import {
   fetchCharacterFilms,
   filmsCleared
 } from '../store';
-import CharacterPage from './CharacterPage';
+import CharacterListPage from './CharacterListPage';
 import FilmListPage from './FilmListPage';
 import { getCharacter, selected } from '../store/characters';
 import { characterShape, filmShape } from '../../utils-shared'
@@ -48,7 +48,7 @@ export class Root extends Component {
             handleCharacterDeselect={this.handleCharacterDeselect}
           />
         ) : (
-          <CharacterPage
+          <CharacterListPage
             characters={characters}
             handleCharacterSelect={this.handleCharacterSelect}
             handleCharacterDeselect={this.handleCharacterDeselect}
