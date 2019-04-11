@@ -40,6 +40,7 @@ describe('CharacterList ', () => {
   it('should render an ErrorMessage if a character has been selected and there is an error', () => {
     const list = shallow(
       <CharacterList
+        characters={[{ id: 1, name: 'Obi Wan Kenobi' }, { id: 2, name: 'Luke Skywalker' }]}
         selectedCharacter={{ id: 1, name: 'Obi Wan Kenobi' }}
         error='load failure'
         {...requiredProps}
