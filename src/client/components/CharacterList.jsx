@@ -21,7 +21,7 @@ const CharacterList = ({
             <CharacterCard
               key={character.id}
               name={character.name}
-              onClick={handleCharacterSelect}
+              onClick={event => handleCharacterSelect(event, character.id)}
             />
           ))
       : null}
