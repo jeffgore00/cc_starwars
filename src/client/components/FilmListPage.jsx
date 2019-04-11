@@ -1,7 +1,7 @@
 import React from 'react';
 import FilmList from './FilmList';
 
-const FilmListContainer = ({ handleCharacterDeselect, films, character }) => (
+const FilmListPage = ({ handleCharacterDeselect, films, character }) => (
   <div id="film-container">
     <nav id="film-header">
       <span id="film-character-name">{character.name.toLowerCase()}</span>
@@ -20,4 +20,4 @@ const FilmListContainer = ({ handleCharacterDeselect, films, character }) => (
   </div>
 );
 
-export default FilmListContainer;
+export default FilmListPage;

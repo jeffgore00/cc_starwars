@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FilmListContainer from '../../../src/client/components/FilmListContainer';
+import FilmListPage from '../../../src/client/components/FilmListPage';
 import FilmList from '../../../src/client/components/FilmList';
 
 const handleCharacterDeselect = jest.fn();
@@ -26,14 +26,14 @@ const props = {
   character: { id: 1, name: 'Obi Wan Kenobi' }
 };
 
-describe('FilmListContainer ', () => {
+describe('FilmListPage ', () => {
   it('renders a FilmList', () => {
-    const filmList = mount(<FilmListContainer {...props} />);
+    const filmList = mount(<FilmListPage {...props} />);
     expect(filmList.exists(FilmList)).toBe(true);
   });
 
   it('calls handleCharacterDeselect on click', () => {
-    const filmList = mount(<FilmListContainer {...props} />);
+    const filmList = mount(<FilmListPage {...props} />);
     const backButton = filmList.childAt(0).childAt(0).childAt(1)
     backButton.props().onClick();
     expect(handleCharacterDeselect).toHaveBeenCalled();

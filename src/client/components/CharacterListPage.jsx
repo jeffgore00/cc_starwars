@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CharacterList from './CharacterList';
 import { characterShape } from '../../utils-shared'
 
-const CharacterListContainer = ({
+const CharacterListPage = ({
   characters,
   handleCharacterSelect,
   handleCharacterDeselect,
@@ -27,13 +27,13 @@ const CharacterListContainer = ({
   </div>
 );
 
-CharacterListContainer.defaultProps = {
+CharacterListPage.defaultProps = {
   characters: null,
   selectedCharacter: null,
   error: null,
 }
 
-CharacterListContainer.propTypes = {
+CharacterListPage.propTypes = {
   characters: PropTypes.arrayOf(characterShape),
   handleCharacterSelect: PropTypes.func.isRequired,
   handleCharacterDeselect: PropTypes.func.isRequired,
@@ -42,4 +42,4 @@ CharacterListContainer.propTypes = {
 }
 
 
-export default CharacterListContainer;
+export default CharacterListPage;

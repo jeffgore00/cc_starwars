@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CharacterListContainer from '../../../src/client/components/CharacterListContainer';
+import CharacterListPage from '../../../src/client/components/CharacterListPage';
 import CharacterList from '../../../src/client/components/CharacterList';
 
-describe('CharacterListContainer', () => {
+describe('CharacterListPage', () => {
   it('should render a <CharacterList>', () => {
-    const container = shallow(<CharacterListContainer />);
+    const container = shallow(<CharacterListPage />);
     expect(container.exists(CharacterList)).toBe(true);
   });
 });
