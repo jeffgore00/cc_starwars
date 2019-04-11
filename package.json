@@ -4,8 +4,8 @@
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "main.js",
   "scripts": {
-    "start-dev": "webpack -w & nodemon ./src/main.js -e html,js,css --ignore public",
-    "start": "node main.js",
+    "start-dev": "webpack -w & NODE_TLS_REJECT_UNAUTHORIZED='0' nodemon ./src/main.js -e html,js,css --ignore public",
+    "start": "NODE_TLS_REJECT_UNAUTHORIZED='0' node main.js",
     "test": "NODE_TLS_REJECT_UNAUTHORIZED='0' jest",
     "deploy": "script/deploy"
   },
