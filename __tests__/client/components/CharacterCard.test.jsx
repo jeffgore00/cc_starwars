@@ -6,7 +6,7 @@ import CharacterCard from '../../../src/client/components/CharacterCard';
 describe('CharacterCard ', () => {
   it('should render a <Card>', () => {
     const card = shallow(
-      <CharacterCard key="1" name="Emperor Palpatine" />
+      <CharacterCard key="1" name="Emperor Palpatine" onClick={jest.fn()}/>
     );
     expect(card.exists(Card)).toBe(true);
     // expect(card.find(Card)) alone, for truthiness, never works, because it always returns a ReactWrapper
