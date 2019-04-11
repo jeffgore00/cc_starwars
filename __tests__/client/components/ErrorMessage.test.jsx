@@ -10,17 +10,17 @@ const store = {
 };
 
 const acknowledgeError = jest.fn(() => store.dispatch('errorAcknowledged'));
-const execRollbackActions = jest.fn();
+const execRollbackActionsMock = jest.fn();
 const errorHandlers = {
   acknowledgeError,
-  execRollbackActions
+  execRollbackActions: execRollbackActionsMock
 };
 
 const error = { source: 'local', statusCode: 404 };
 
 describe('The ErrorMessage Component', () => {
   it('renders a modal by default', () => {
-    const errorMessage = mount(<ErrorMessage store={store} error={error} />);
+    const errorMessage = mount(<ErrorMessage store={store} error={error} execRollbackActions={execRollbackActionsMock}/>);
     expect(errorMessage.exists(Modal)).toBe(true);
   });
 
@@ -47,7 +47,7 @@ describe('The ErrorMessage Component', () => {
       error: null,
       type: 'ERROR_ACKNOWLEDGED'
     });
-    expect(execRollbackActions).toHaveBeenCalled();
+    expect(execRollbackActionsMock).toHaveBeenCalled();
   });
 
   /* Note that this test suite does not even check if the modal is closed when
