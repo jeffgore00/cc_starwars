@@ -3,7 +3,7 @@ import app from '../../../src/server';
 import utils from '../../../src/server/utils-server';
 import * as utilsShared from '../../../src/utils-shared';
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 describe('API routes', () => {
   beforeEach(() => jest.resetModules());
