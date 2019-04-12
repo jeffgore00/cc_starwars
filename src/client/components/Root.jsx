@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import {
   fetchCharacters,
   toggleCharacterSelection,
@@ -11,55 +11,52 @@ import {
 import CharacterListPage from './CharacterListPage';
 import FilmListPage from './FilmListPage';
 import { getCharacter, selected } from '../store/characters';
-import { characterShape, filmShape } from '../../utils-shared'
+import { characterShape, filmShape } from '../../utils-shared';
 
-export class Root extends Component {
-  constructor() {
-    super();
-    this.handleCharacterSelect = this.handleCharacterSelect.bind(this);
-    this.handleCharacterDeselect = this.handleCharacterDeselect.bind(this);
-  }
-
-  componentDidMount() {
-    const { loadCharacters } = this.props;
+const Root = ({
+  characters,
+  selectedCharacter,
+  selectCharacter,
+  loadCharacters,
+  films,
+  loadFilms,
+  clearFilms,
+  error
+}) => {
+  useEffect(() => {
     loadCharacters();
-  }
+  }, []);
 
-  handleCharacterSelect(event, charId) {
-    const { selectCharacter, loadFilms, characters } = this.props;
+  const handleCharacterSelect = (event, charId) => {
     selectCharacter(characters, charId);
     loadFilms(charId);
-  }
+  };
 
-  handleCharacterDeselect(event, charId) {
-    const { selectCharacter, clearFilms, characters } = this.props;
+  const handleCharacterDeselect = (event, charId) => {
     selectCharacter(characters, charId);
     clearFilms();
-  }
+  };
 
-  render() {
-    const { characters, selectedCharacter, films, error } = this.props;
-    return (
-      <div>
-        {selectedCharacter && films.length > 0 ? (
-          <FilmListPage
-            character={selectedCharacter}
-            films={films}
-            handleCharacterDeselect={this.handleCharacterDeselect}
-          />
-        ) : (
-          <CharacterListPage
-            characters={characters}
-            handleCharacterSelect={this.handleCharacterSelect}
-            handleCharacterDeselect={this.handleCharacterDeselect}
-            selectedCharacter={selectedCharacter}
-            error={error}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {selectedCharacter && films.length > 0 ? (
+        <FilmListPage
+          character={selectedCharacter}
+          films={films}
+          handleCharacterDeselect={handleCharacterDeselect}
+        />
+      ) : (
+        <CharacterListPage
+          characters={characters}
+          handleCharacterSelect={handleCharacterSelect}
+          handleCharacterDeselect={handleCharacterDeselect}
+          selectedCharacter={selectedCharacter}
+          error={error}
+        />
+      )}
+    </div>
+  );
+};
 
 const mapState = ({ characters, films, error }) => {
   return {
@@ -86,8 +83,8 @@ Root.defaultProps = {
   characters: null,
   films: null,
   selectedCharacter: null,
-  error: null,
-}
+  error: null
+};
 
 Root.propTypes = {
   characters: PropTypes.arrayOf(characterShape),
@@ -97,8 +94,8 @@ Root.propTypes = {
   loadCharacters: PropTypes.func.isRequired,
   clearFilms: PropTypes.func.isRequired,
   selectedCharacter: characterShape,
-  error: PropTypes.string,
-}
+  error: PropTypes.string
+};
 
 export default connect(
   mapState,
