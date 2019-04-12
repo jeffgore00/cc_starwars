@@ -1,14 +1,14 @@
 {
   "presets": [
-    "react",
+    "@babel/react",
     [
-      "env",
+      "@babel/env",
       {
         "targets": {
           "node": "current"
         }
       }
-    ],
-    "stage-2"
-  ]
+    ]
+  ],
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }

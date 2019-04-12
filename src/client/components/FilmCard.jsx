@@ -4,7 +4,7 @@ import { romanize } from '../utils-client';
 
 const FilmCard = ({ episode, title, date, desc }) => (
   <Item>
-    <Item.Image src={`images/poster_episode_0${episode}.png`} />
+    <Item.Image src={`/images/poster_episode_0${episode}.png`} />
     <Item.Content>
       <Item.Header>{`Episode ${romanize(episode)}: ${title}`}</Item.Header>
       <Item.Meta>

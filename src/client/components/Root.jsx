@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 import {
   fetchCharacters,
   toggleCharacterSelection,
@@ -7,11 +8,12 @@ import {
   fetchCharacterFilms,
   filmsCleared
 } from '../store';
-import CharacterListContainer from './CharacterListContainer';
-import FilmListContainer from './FilmListContainer';
+import CharacterListPage from './CharacterListPage';
+import FilmListPage from './FilmListPage';
 import { getCharacter, selected } from '../store/characters';
+import { characterShape, filmShape } from '../../utils-shared'
 
-class Root extends Component {
+export class Root extends Component {
   constructor() {
     super();
     this.handleCharacterSelect = this.handleCharacterSelect.bind(this);
@@ -19,31 +21,34 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    this.props.loadCharacters();
+    const { loadCharacters } = this.props;
+    loadCharacters();
   }
 
   handleCharacterSelect(event, charId) {
-    this.props.selectCharacter(this.props.characters, charId);
-    this.props.loadFilms(charId);
+    const { selectCharacter, loadFilms, characters } = this.props;
+    selectCharacter(characters, charId);
+    loadFilms(charId);
   }
 
   handleCharacterDeselect(event, charId) {
-    this.props.selectCharacter(this.props.characters, charId);
-    this.props.clearFilms();
+    const { selectCharacter, clearFilms, characters } = this.props;
+    selectCharacter(characters, charId);
+    clearFilms();
   }
 
   render() {
     const { characters, selectedCharacter, films, error } = this.props;
     return (
       <div>
-        {selectedCharacter && films.length ? (
-          <FilmListContainer
+        {selectedCharacter && films.length > 0 ? (
+          <FilmListPage
             character={selectedCharacter}
             films={films}
             handleCharacterDeselect={this.handleCharacterDeselect}
           />
         ) : (
-          <CharacterListContainer
+          <CharacterListPage
             characters={characters}
             handleCharacterSelect={this.handleCharacterSelect}
             handleCharacterDeselect={this.handleCharacterDeselect}
@@ -76,6 +81,24 @@ const mapDispatch = dispatch => {
     clearFilms: () => dispatch(filmsCleared())
   };
 };
+
+Root.defaultProps = {
+  characters: null,
+  films: null,
+  selectedCharacter: null,
+  error: null,
+}
+
+Root.propTypes = {
+  characters: PropTypes.arrayOf(characterShape),
+  films: PropTypes.arrayOf(filmShape),
+  selectCharacter: PropTypes.func.isRequired,
+  loadFilms: PropTypes.func.isRequired,
+  loadCharacters: PropTypes.func.isRequired,
+  clearFilms: PropTypes.func.isRequired,
+  selectedCharacter: characterShape,
+  error: PropTypes.string,
+}
 
 export default connect(
   mapState,

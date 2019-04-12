@@ -1,0 +1,18 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "jest": true,
+    "describe": true,
+    "test": true,
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "beforeAll": true,
+    "afterAll": true
+  },
+
+  "extends": ["amex", "prettier", "prettier/react"]
+}

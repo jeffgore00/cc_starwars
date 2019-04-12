@@ -4,32 +4,41 @@
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "main.js",
   "scripts": {
-    "start-dev": "webpack -w & nodemon main.js -e html,js,css --ignore public",
-    "start": "node main.js",
-    "test": "NODE_ENV=testing mocha test --watch  --compilers js:babel-register -r jsdom-global/register",
+    "start-dev": "webpack -w & NODE_TLS_REJECT_UNAUTHORIZED='0' nodemon ./src/main.js -e html,js,css --ignore public",
+    "start": "NODE_TLS_REJECT_UNAUTHORIZED='0' node main.js",
+    "test": "NODE_TLS_REJECT_UNAUTHORIZED='0' jest",
     "deploy": "script/deploy"
   },
   "keywords": [],
   "author": "Jeff Gore",
   "license": "ISC",
+  "jest": {
+    "preset": "amex-jest-preset-react"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "morgan": "^1.9.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
-    "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "semantic-ui-react": "^0.82.5"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/register": "^7.4.0",
+    "@types/jest": "^24.0.11",
+    "amex-jest-preset-react": "^5.0.1",
     "axios-mock-adapter": "^1.15.0",
+<<<<<<< HEAD
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
@@ -46,6 +55,19 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
+=======
+    "babel-loader": "^8.0.5",
+    "babel-preset-amex": "^2.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.16.0",
+    "eslint-config-amex": "^10.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "jest": "^24.5.0",
+    "prettier": "^1.16.4",
+    "redux-mock-store": "^1.5.3",
+    "supertest": "^4.0.2",
+>>>>>>> master
     "webpack": "^4.4.1",
     "webpack-cli": "^3.1.1"
   }
