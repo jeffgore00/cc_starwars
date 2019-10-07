@@ -17,3 +17,7 @@ errors.log
 # Test
 test-results
 .jest-cache
+
+# Cypress
+cypress/screenshots
+cypress/videos

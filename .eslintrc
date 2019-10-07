@@ -1,7 +1,9 @@
 {
   "env": {
     "node": true,
-    "jest": true
+    "jest": true,
+    "plugins": ["eslint-plugin-cypress"],
+    "env": {"cypress/globals": true}
   },
   "globals": {
     "jest": true,
