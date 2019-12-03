@@ -4,10 +4,13 @@
   "description": "A small app that interacts with the Star Wars API (SWAPI).",
   "main": "main.js",
   "scripts": {
-    "start-dev": "webpack -w & NODE_TLS_REJECT_UNAUTHORIZED='0' nodemon ./src/main.js -e html,js,css --ignore public",
-    "start": "NODE_TLS_REJECT_UNAUTHORIZED='0' node main.js",
-    "test": "NODE_TLS_REJECT_UNAUTHORIZED='0' jest",
-    "deploy": "script/deploy"
+    "start-dev": "webpack -w && nodemon ./src/main.js -e html,js,css --ignore public",
+    "start": "node main.js",
+    "test": "jest",
+    "deploy": "script/deploy",
+    "cy:run": "cypress run",
+    "test:e2e:dev": "start-server-and-test start-dev http://localhost:1337 cy:run",
+    "lint": "eslint ./src/main.js --fix"
   },
   "keywords": [],
   "author": "Jeff Gore",
@@ -51,6 +54,7 @@
     "jest": "^24.5.0",
     "prettier": "^1.16.4",
     "redux-mock-store": "^1.5.3",
+    "start-server-and-test": "^1.10.6",
     "supertest": "^4.0.2",
     "webpack": "^4.4.1",
     "webpack-cli": "^3.1.1"
