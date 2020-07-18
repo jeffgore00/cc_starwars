@@ -16,7 +16,12 @@
     "preset": "amex-jest-preset-react"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/register": "^7.4.0",
     "axios": "^0.18.1",
+    "babel-loader": "^8.0.5",
+    "babel-preset-amex": "^2.0.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "morgan": "^1.9.1",
@@ -28,18 +33,14 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
+    "request": "^2.88.2",
     "request-promise": "^4.2.2",
     "semantic-ui-react": "^0.82.5"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/polyfill": "^7.4.0",
-    "@babel/register": "^7.4.0",
     "@types/jest": "^24.0.11",
     "amex-jest-preset-react": "^5.0.1",
     "axios-mock-adapter": "^1.15.0",
-    "babel-loader": "^8.0.5",
-    "babel-preset-amex": "^2.0.0",
     "enzyme": "^3.9.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.16.0",
