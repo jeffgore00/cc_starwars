@@ -80,7 +80,7 @@ describe('Redux Store', () => {
     const updatedCharacters = addAdminPropsToCharacters(initialCharacters);
 
     expect(updatedCharacters[0].name).toEqual('Luke Skywalker');
-    expect(updatedCharacters[0].url).toEqual('https://swapi.co/api/people/1/');
+    expect(updatedCharacters[0].url).toEqual('https://swapi.dev/api/people/1/');
   });
 
   it('charactersUpdated() should be an action creator which returns an action of type CHARACTERS_UPDATED', () => {

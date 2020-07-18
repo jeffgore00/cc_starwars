@@ -15,13 +15,13 @@ describe('API routes', () => {
       .expect(200)
       .then(res =>
         expect(res.body).toEqual([
-          { name: 'Luke Skywalker', url: 'https://swapi.co/api/people/1/' },
-          { name: 'Darth Vader', url: 'https://swapi.co/api/people/4/' },
+          { name: 'Luke Skywalker', url: 'https://swapi.dev/api/people/1/' },
+          { name: 'Darth Vader', url: 'https://swapi.dev/api/people/4/' },
           {
             name: 'Obi-wan Kenobi',
-            url: 'https://swapi.co/api/people/unknown/'
+            url: 'https://swapi.dev/api/people/unknown/'
           },
-          { name: 'R2-D2', url: 'https://swapi.co/api/people/3/' }
+          { name: 'R2-D2', url: 'https://swapi.dev/api/people/3/' }
         ])
       );
   });

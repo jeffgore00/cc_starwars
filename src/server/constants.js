@@ -1,3 +1,3 @@
-const SWAPI_ADDRESS = 'https://swapi.co/api';
+const SWAPI_ADDRESS = 'https://swapi.dev/api';
 
 module.exports = { SWAPI_ADDRESS };
