@@ -12,7 +12,7 @@ One of the constraints of the challenge is that a bare-bones `characters.json` f
 
 Clicking on a character makes a call to SWAPI for more character details, which yields the API endpoints for their films, which then results in a second request for film details.
 
-One of the characters in the provided JSON, Obi-Wan, has a purposefully incorrect SWAPI URL.
+One of the characters in the provided JSON, Obi-Wan, has a purposefully incorrect SWAPI URL in order to demonstrate error handling.
 
 ## Features / Selling Points
 
